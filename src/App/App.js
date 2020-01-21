@@ -1,24 +1,24 @@
 import React from 'react';
 import Header from 'components/Header';
+import DotsGame from 'modules/DotsGame';
 import Footer from 'components/Footer';
-import MainPanel from 'sections/MainPanel';
-import InfoPanel from 'sections/InfoPanel';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+import useStyles from './style/useStyles';
 import 'typeface-roboto';
 
 function App() {
+  const classes = useStyles();
   return (
-    <>
+    <Box className={classes.root}>
       <CssBaseline />
 
       <Header />
-      <Container>
-        <MainPanel />
-        <InfoPanel />
-      </Container>
+      <Box className={classes.gameWrapper}>
+        <DotsGame />
+      </Box>
       <Footer />
-    </>
+    </Box>
   );
 }
 
