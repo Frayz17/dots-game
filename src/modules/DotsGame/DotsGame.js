@@ -7,6 +7,7 @@ import useStyles from './style/useStyles';
 
 export default function DotsGame() {
   const classes = useStyles();
+
   return (
     <Container className={classes.root}>
       <Grid container>
