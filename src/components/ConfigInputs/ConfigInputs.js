@@ -4,8 +4,13 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import handleSelectDificulty from './handleSelectDificulty';
+import setDificultyList from './setDificultyList';
+import allowToPlay from './allowToPlay';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -17,41 +22,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ConfigInputs() {
-  const [dificulties, setDificulties] = React.useState({});
-  const [selectedDifficulty, setSelectedDifficulty] = React.useState('');
-
+export default connect((state) => {
+  return {
+    gameDificulty: state.gameDificulty,
+    playerName: state.playerName
+  };
+})(function ConfigInputs({ gameDificulty, playerName }) {
   const classes = useStyles();
 
   React.useEffect(() => {
-    (async () => {
-      try {
-        const result = await axios(
-          'https://starnavi-frontend-test-task.herokuapp.com/game-settings'
-        );
-        setDificulties(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
+    setDificultyList();
   }, []);
 
-  const handleSelectDificulty = (event) => {
-    setSelectedDifficulty(event.target.value);
-  };
-
-  const dificultiesName = Object.keys(dificulties);
-  console.log(dificultiesName);
-  console.log('selectedDifficulty', selectedDifficulty);
+  const dificultiesName = Object.keys(gameDificulty.list);
+  const CheckAllowToPlay = allowToPlay(gameDificulty.list, playerName);
 
   return (
     <Box>
       <FormControl className={classes.formControl}>
-        <InputLabel id='demo-simple-select-label'>Select Dificulty</InputLabel>
+        <InputLabel id="demo-simple-select-label">Select Dificulty</InputLabel>
         <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={selectedDifficulty}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={gameDificulty.selected}
           onChange={handleSelectDificulty}
         >
           {dificultiesName.map((item) => {
@@ -59,14 +52,17 @@ export default function ConfigInputs() {
               item.charAt(0).toUpperCase() +
               item.substring(1).replace(/([a-z])([A-Z])/, '$1 $2');
             return (
-              <MenuItem key={item} value={dificulties[item]}>
+              <MenuItem key={item} value={gameDificulty.list[item]}>
                 {formattedName}
               </MenuItem>
             );
           })}
         </Select>
       </FormControl>
-      {/* InputName, BtnPlay */}
+      <TextField label="player name" value={playerName} />
+      <Button variant="contained" color="primary" disabled={CheckAllowToPlay}>
+        play
+      </Button>
     </Box>
   );
-}
+});

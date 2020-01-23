@@ -2,5 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from 'App';
+import { newStore, StoreProvider, gameDificulty } from 'services/Store';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+newStore({ gameDificulty });
+
+ReactDOM.render(
+  <StoreProvider>
+    <App />
+  </StoreProvider>,
+  document.getElementById('root')
+);
