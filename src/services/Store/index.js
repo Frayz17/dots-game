@@ -1,6 +1,6 @@
 import { newStore, getStore, getState } from './Store.js';
 
 import StoreProvider from './StoreProvider';
-import gameDificulty from './reducers/gameDificulty';
+import gameConfiguration from './reducers/gameConfiguration';
 
-export { newStore, getStore, getState, StoreProvider, gameDificulty };
+export { newStore, getStore, getState, StoreProvider, gameConfiguration };

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from 'App';
-import { newStore, StoreProvider, gameDificulty } from 'services/Store';
+import { newStore, StoreProvider, gameConfiguration } from 'services/Store';
 
-newStore({ gameDificulty });
+newStore({ gameConfiguration });
 
 ReactDOM.render(
   <StoreProvider>
