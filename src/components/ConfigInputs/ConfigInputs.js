@@ -12,14 +12,17 @@ import handleSelectDificulty from './handleSelectDificulty';
 import setDificultyList from './setDificultyList';
 import handleSetPlayerName from './handleSetPlayerName';
 import handleFormSubmit from './handleFormSubmit';
+import stringFormatter from './stringFormatter';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 150
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
+  form: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }));
 
@@ -40,37 +43,38 @@ export default connect((state) => {
 
   return (
     <Box>
-      <form onSubmit={handleFormSubmit}>
+      <form className={classes.form} onSubmit={handleFormSubmit}>
         <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">
+          <InputLabel id='demo-simple-select-label'>
             Select Dificulty
           </InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId='demo-simple-select-label'
+            id='demo-simple-select'
             value={dificultySelected}
             onChange={handleSelectDificulty}
           >
-            {dificultiesName.map((item) => {
-              const formattedName =
-                item.charAt(0).toUpperCase() +
-                item.substring(1).replace(/([a-z])([A-Z])/, '$1 $2');
+            {dificultiesName.map((name) => {
               return (
-                <MenuItem key={item} value={dificultiesList[item]}>
-                  {formattedName}
+                <MenuItem key={name} value={dificultiesList[name]}>
+                  {stringFormatter(name)}
                 </MenuItem>
               );
             })}
           </Select>
         </FormControl>
-        <TextField
-          label="player name"
-          onChange={handleSetPlayerName}
-          value={playerName}
-        />
-        <Button type="submit" variant="contained" color="primary">
-          play
-        </Button>
+        <FormControl className={classes.formControl}>
+          <TextField
+            label='player name'
+            onChange={handleSetPlayerName}
+            value={playerName}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <Button type='submit' variant='contained' color='primary'>
+            play
+          </Button>
+        </FormControl>
       </form>
     </Box>
   );

@@ -1,11 +1,17 @@
-import { getStore } from 'services/Store';
+import { getStore, getState } from 'services/Store';
+import isObjEmpty from 'functions/isObjEmpty';
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
 
-  getStore().dispatch({
-    type: 'GAME_START_SET_TRUE'
-  });
+  const { dificultySelected, playerName } = getState().gameConfiguration;
+
+  if (!isObjEmpty(dificultySelected) && playerName.length > 3) {
+    console.log(dificultySelected, playerName);
+    getStore().dispatch({
+      type: 'GAME_START_SET_TRUE'
+    });
+  }
 };
 
 export default handleFormSubmit;
