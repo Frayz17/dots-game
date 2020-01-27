@@ -1,75 +1,46 @@
 import React from 'react';
-// import { Table } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import { getState } from 'services/Store';
+import { connect } from 'react-redux';
+import useStyles from './style/useStyles';
 
-const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   alignItems: 'center'
-  // },
-  // tr: {
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center'
-  // },
-  // td: {
-  //   width: 30,
-  //   height: 30,
-  //   backgroundColor: 'green',
-  //   borderTop: '1px solid black',
-  //   borderLeft: '1px solid black'
-  // }
-  root: {
-    width: 400,
-    height: 400
-  },
-  board: {
-    display: 'grid',
-    // width: 'calc(4 * 50px)',
-    gridTemplateColumns: 'repeat(2, 1fr 1.2fr)',
-    justifyContent: 'center',
-    // gridTemplateRows: 'repeat(3, 1fr)'
-    gridTemplateRows: 'repeat(4, 100px)',
-    alignItems: 'stretch'
-  },
-  td: {
-    backgroundColor: 'green',
-    border: '1px solid black'
-    // width: 50,
-    // height: 50
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     width: 400,
+//     height: 400
+//   },
+//   board: {
+//     display: 'grid',
+//     gridTemplateColumns: 'repeat(5, 1fr)',
+//     justifyContent: 'center',
+//     gridTemplateRows: 'repeat(5, 80px)',
+//     alignItems: 'stretch'
+//   },
+//   td: {
+//     backgroundColor: 'green',
+//     borderLeft: '1px solid black',
+//     borderTop: '1px solid black'
+//   }
+// }));
+
+export default connect((state) => {
+  return {
+    dificultySelected: state.gameConfiguration.dificultySelected
+  };
+})(function Board({ dificultySelected }) {
+  const classes = useStyles()();
+  // console.log(dificultySelected);
+
+  const boardFields = dificultySelected.field * dificultySelected.field;
+  const collector = [];
+  for (let i = 0; i < boardFields; i++) {
+    collector.push(<div key={i} className={classes.td}></div>);
   }
-}));
 
-export default function Board() {
-  const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <div className={classes.board}>
-        {/* <div className={classes.tr}> */}
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        {/* </div> */}
-        {/* // <div className={classes.tr}> */}
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        {/* // </div> */}
-        {/* // <div className={classes.tr}> */}
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        <div className={classes.td}></div>
-        {/* // </div> */}
-      </div>
+      <div className={classes.board}>{collector}</div>
     </Box>
   );
-}
+});

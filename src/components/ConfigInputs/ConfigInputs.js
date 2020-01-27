@@ -1,4 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import handleSelectDificulty from './functions/handleSelectDificulty';
+import setDificultyList from './functions/setDificultyList';
+import handleSetPlayerName from './functions/handleSetPlayerName';
+import handleFormSubmit from './functions/handleFormSubmit';
+import stringFormatter from './functions/stringFormatter';
 import Box from '@material-ui/core/Box';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -6,34 +12,55 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
-import handleSelectDificulty from './handleSelectDificulty';
-import setDificultyList from './setDificultyList';
-import handleSetPlayerName from './handleSetPlayerName';
-import handleFormSubmit from './handleFormSubmit';
-import stringFormatter from './stringFormatter';
+import styleConfigInputs from './style/styleConfigInputs';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 150
-  },
-  form: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-}));
+// const styleConfigInputs = makeStyles((theme) => ({
+//   form: {
+//     display: 'flex',
+//     alignItems: 'flex-end',
+//     justifyContent: 'center'
+//   },
+//   formControl: {
+//     margin: theme.spacing(1)
+//   },
+//   selectDificulty: {
+//     width: 180
+//   },
+//   playerNameInput: {
+//     width: 180
+//   },
+//   btnPlay: {
+//     width: 120
+//   },
+//   '@media (max-width: 490px)': {
+//     form: {
+//       flexDirection: 'column',
+//       alignItems: 'center'
+//     },
+//     selectDificulty: {
+//       width: 250
+//     },
+//     playerNameInput: {
+//       width: 250
+//     },
+//     btnPlay: {
+//       width: 250
+//     }
+//   }
+// }));
 
 export default connect((state) => {
   return {
-    gameConfiguration: state.gameConfiguration
+    gameConfiguration: state.gameConfiguration,
+    player: state.player
   };
 })(function ConfigInputs({
-  gameConfiguration: { dificultiesList, dificultySelected, playerName }
+  gameConfiguration: { dificultiesList, dificultySelected },
+  player
 }) {
-  const classes = useStyles();
+  const classes = styleConfigInputs();
+
+  console.log(styleConfigInputs());
 
   React.useEffect(() => {
     setDificultyList();
@@ -45,12 +72,11 @@ export default connect((state) => {
     <Box>
       <form className={classes.form} onSubmit={handleFormSubmit}>
         <FormControl className={classes.formControl}>
-          <InputLabel id='demo-simple-select-label'>
-            Select Dificulty
-          </InputLabel>
+          <InputLabel id="dificulty-select-label">Select Dificulty</InputLabel>
           <Select
-            labelId='demo-simple-select-label'
-            id='demo-simple-select'
+            labelId="dificulty-select-label"
+            id="dificulty-select"
+            className={classes.selectDificulty}
             value={dificultySelected}
             onChange={handleSelectDificulty}
           >
@@ -63,15 +89,23 @@ export default connect((state) => {
             })}
           </Select>
         </FormControl>
+
         <FormControl className={classes.formControl}>
           <TextField
-            label='player name'
+            className={classes.playerNameInput}
+            label="player name"
             onChange={handleSetPlayerName}
-            value={playerName}
+            value={player.name}
           />
         </FormControl>
+
         <FormControl className={classes.formControl}>
-          <Button type='submit' variant='contained' color='primary'>
+          <Button
+            className={classes.btnPlay}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
             play
           </Button>
         </FormControl>

@@ -4,7 +4,8 @@ import isObjEmpty from 'functions/isObjEmpty';
 const handleFormSubmit = (e) => {
   e.preventDefault();
 
-  const { dificultySelected, playerName } = getState().gameConfiguration;
+  const { dificultySelected } = getState().gameConfiguration;
+  const { name: playerName } = getState().player;
 
   if (!isObjEmpty(dificultySelected) && playerName.length > 3) {
     console.log(dificultySelected, playerName);

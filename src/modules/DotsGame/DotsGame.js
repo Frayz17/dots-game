@@ -11,10 +11,10 @@ export default function DotsGame() {
   return (
     <Container className={classes.root}>
       <Grid container>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} md={8}>
           <MainPanel />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
           <InfoPanel />
         </Grid>
       </Grid>

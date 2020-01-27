@@ -6,10 +6,11 @@ import {
   newStore,
   StoreProvider,
   gameConfiguration,
-  gameStartFlag
+  gameStartFlag,
+  player
 } from 'services/Store';
 
-newStore({ gameConfiguration, gameStartFlag });
+newStore({ gameConfiguration, gameStartFlag, player });
 
 ReactDOM.render(
   <StoreProvider>
