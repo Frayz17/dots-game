@@ -1,46 +1,51 @@
 import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import { getState } from 'services/Store';
+import { getState, gameStartFlag } from 'services/Store';
 import { connect } from 'react-redux';
-import useStyles from './style/useStyles';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     width: 400,
-//     height: 400
-//   },
-//   board: {
-//     display: 'grid',
-//     gridTemplateColumns: 'repeat(5, 1fr)',
-//     justifyContent: 'center',
-//     gridTemplateRows: 'repeat(5, 80px)',
-//     alignItems: 'stretch'
-//   },
-//   td: {
-//     backgroundColor: 'green',
-//     borderLeft: '1px solid black',
-//     borderTop: '1px solid black'
-//   }
-// }));
+import StyleBoard from './style/StyleBoard';
+import BoardCell from './BoardCell';
 
 export default connect((state) => {
   return {
-    dificultySelected: state.gameConfiguration.dificultySelected
+    dificultySelected: state.gameConfiguration.dificultySelected,
+    gameStartFlag: state.gameStartFlag
   };
-})(function Board({ dificultySelected }) {
-  const classes = useStyles()();
-  // console.log(dificultySelected);
+})(function Board({ dificultySelected, gameStartFlag }) {
+  const [fields, setFields] = React.useState([]);
+  const classes = StyleBoard()();
+  // inactive, active, success, fail
 
-  const boardFields = dificultySelected.field * dificultySelected.field;
-  const collector = [];
-  for (let i = 0; i < boardFields; i++) {
-    collector.push(<div key={i} className={classes.td}></div>);
+  React.useEffect(() => {
+    const boardFields = dificultySelected.field * dificultySelected.field;
+    const collector = [];
+    for (let i = 0; i < boardFields; i++) {
+      collector.push({ id: i, status: 'inactive' });
+    }
+
+    setFields(collector);
+  }, [dificultySelected.field]);
+
+  React.useEffect(() => {
+    if (gameStartFlag) {
+      const delayInterval = setInterval(() => {}, dificultySelected.delay);
+    }
+  }, [gameStartFlag, dificultySelected.delay]);
+
+  const cellStatusChange = (id) => {
+    const tempFields = fields.map((item) => {
+      if (item.id === id) {
+      }
+    });
+  };
+
+  const boardCells = [];
+  for (let i = 0; i < fields.length; i++) {
+    boardCells.push(<BoardCell id={fields.id} status={fields.status} />);
   }
 
   return (
     <Box className={classes.root}>
-      <div className={classes.board}>{collector}</div>
+      <div className={classes.board}>{boardCells}</div>
     </Box>
   );
 });

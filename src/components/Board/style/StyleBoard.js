@@ -1,19 +1,15 @@
 import { getState } from 'services/Store';
 import { makeStyles } from '@material-ui/core/styles';
 
-// console.log(getState());
-// const { dificultySelected } = getState().gameConfiguration;
-// console.log('dificultySelected', dificultySelected);
-
 export default () => {
   const {
-    dificultySelected: { field, delay }
+    dificultySelected: { field }
   } = getState().gameConfiguration;
 
   const boardSize = 450;
   const coefficient = 0.8;
 
-  const useStyles = makeStyles((theme) => ({
+  const StyleBoard = makeStyles((theme) => ({
     root: {
       margin: 'auto',
       width: boardSize,
@@ -25,11 +21,6 @@ export default () => {
       justifyContent: 'center',
       gridTemplateRows: `repeat(${field}, ${boardSize / field}px)`,
       alignItems: 'stretch'
-    },
-    td: {
-      backgroundColor: 'green',
-      borderLeft: '1px solid black',
-      borderTop: '1px solid black'
     },
     '@media (max-width: 490px)': {
       root: {
@@ -43,5 +34,5 @@ export default () => {
     }
   }));
 
-  return useStyles;
+  return StyleBoard;
 };

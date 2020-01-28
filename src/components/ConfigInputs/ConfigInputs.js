@@ -14,41 +14,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styleConfigInputs from './style/styleConfigInputs';
 
-// const styleConfigInputs = makeStyles((theme) => ({
-//   form: {
-//     display: 'flex',
-//     alignItems: 'flex-end',
-//     justifyContent: 'center'
-//   },
-//   formControl: {
-//     margin: theme.spacing(1)
-//   },
-//   selectDificulty: {
-//     width: 180
-//   },
-//   playerNameInput: {
-//     width: 180
-//   },
-//   btnPlay: {
-//     width: 120
-//   },
-//   '@media (max-width: 490px)': {
-//     form: {
-//       flexDirection: 'column',
-//       alignItems: 'center'
-//     },
-//     selectDificulty: {
-//       width: 250
-//     },
-//     playerNameInput: {
-//       width: 250
-//     },
-//     btnPlay: {
-//       width: 250
-//     }
-//   }
-// }));
-
 export default connect((state) => {
   return {
     gameConfiguration: state.gameConfiguration,
@@ -72,10 +37,10 @@ export default connect((state) => {
     <Box>
       <form className={classes.form} onSubmit={handleFormSubmit}>
         <FormControl className={classes.formControl}>
-          <InputLabel id="dificulty-select-label">Select Dificulty</InputLabel>
+          <InputLabel id='dificulty-select-label'>Select Dificulty</InputLabel>
           <Select
-            labelId="dificulty-select-label"
-            id="dificulty-select"
+            labelId='dificulty-select-label'
+            id='dificulty-select'
             className={classes.selectDificulty}
             value={dificultySelected}
             onChange={handleSelectDificulty}
@@ -93,7 +58,7 @@ export default connect((state) => {
         <FormControl className={classes.formControl}>
           <TextField
             className={classes.playerNameInput}
-            label="player name"
+            label='Player Name'
             onChange={handleSetPlayerName}
             value={player.name}
           />
@@ -102,9 +67,9 @@ export default connect((state) => {
         <FormControl className={classes.formControl}>
           <Button
             className={classes.btnPlay}
-            type="submit"
-            variant="contained"
-            color="primary"
+            type='submit'
+            variant='contained'
+            color='primary'
           >
             play
           </Button>
