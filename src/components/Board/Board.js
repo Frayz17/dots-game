@@ -4,6 +4,7 @@ import { getState, gameStartFlag } from 'services/Store';
 import { connect } from 'react-redux';
 import StyleBoard from './style/StyleBoard';
 import BoardCell from './BoardCell';
+import arrayShuffle from 'functions/arrayShuffle';
 
 export default connect((state) => {
   return {
@@ -12,35 +13,80 @@ export default connect((state) => {
   };
 })(function Board({ dificultySelected, gameStartFlag }) {
   const [fields, setFields] = React.useState([]);
+  const [counter, setCounter] = React.useState(0);
+  const [score, setScore] = React.useState(0);
   const classes = StyleBoard()();
-  // inactive, active, success, fail
 
+  // init fields
   React.useEffect(() => {
-    const boardFields = dificultySelected.field * dificultySelected.field;
+    const allFields = dificultySelected.field * dificultySelected.field;
     const collector = [];
-    for (let i = 0; i < boardFields; i++) {
-      collector.push({ id: i, status: 'inactive' });
+    for (let i = 0; i < allFields; i++) {
+      collector.push({ id: i, status: 'inactive', catch: null });
     }
 
-    setFields(collector);
+    setFields(arrayShuffle(collector));
   }, [dificultySelected.field]);
 
-  React.useEffect(() => {
-    if (gameStartFlag) {
-      const delayInterval = setInterval(() => {}, dificultySelected.delay);
-    }
-  }, [gameStartFlag, dificultySelected.delay]);
+  const fieldsLength = fields.length;
+  const gameStart = gameStartFlag.gameStart;
+  const delay = dificultySelected.delay;
 
-  const cellStatusChange = (id) => {
-    const tempFields = fields.map((item) => {
-      if (item.id === id) {
+  // game logic
+  React.useEffect(() => {
+    let delayInterval;
+
+    if (gameStartFlag.gameStart === true && counter < fieldsLength) {
+      const newFields = [...fields];
+      newFields[counter] = { ...newFields[counter], status: 'active' };
+      cellChangeStatus(counter, 'active')();
+
+      delayInterval = setInterval(() => {
+        cellChangeStatus(counter, 'success')();
+        setCounter(counter + 1);
+      }, delay || 2000);
+    }
+
+    return () => {
+      clearInterval(delayInterval);
+    };
+  }, [gameStart, counter, fieldsLength]);
+
+  const cellChangeStatus = (id, status) => () => {
+    const tempFields = fields.map((field) => {
+      if (field.id === id) {
+        field.status = status;
       }
+
+      return field;
     });
+
+    setFields(tempFields);
+  };
+
+  const isCatch = (id) => {
+    const tempFields = fields.map((field) => {
+      if (field.id === id && field.status === 'active') {
+        field.status = 'success';
+      }
+
+      return field;
+    });
+
+    setFields(tempFields);
   };
 
   const boardCells = [];
   for (let i = 0; i < fields.length; i++) {
-    boardCells.push(<BoardCell id={fields.id} status={fields.status} />);
+    boardCells.push(
+      <BoardCell
+        key={fields[i].id}
+        id={fields[i].id}
+        status={fields[i].status}
+        counter={counter}
+        cellChangeStatus={cellChangeStatus}
+      />
+    );
   }
 
   return (
