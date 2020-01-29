@@ -1,4 +1,5 @@
 import React from 'react';
+// import cellChangeStatus from './functions/cellChangeStatus';
 import Box from '@material-ui/core/Box';
 import { getState, gameStartFlag } from 'services/Store';
 import { connect } from 'react-redux';
@@ -36,13 +37,27 @@ export default connect((state) => {
   React.useEffect(() => {
     let delayInterval;
 
-    if (gameStartFlag.gameStart === true && counter < fieldsLength) {
+    const cellChangeStatus = (id, status) => () => {
+      let tempFields = [...fields];
+      tempFields = tempFields.map((field) => {
+        if (field.id === id) {
+          field.status = status;
+        }
+
+        return field;
+      });
+
+      // setFields(tempFields);
+    };
+
+    if (gameStart === true && counter < fieldsLength) {
       const newFields = [...fields];
       newFields[counter] = { ...newFields[counter], status: 'active' };
-      cellChangeStatus(counter, 'active')();
-
+      // cellChangeStatus(counter, 'active')();
+      // setFields(newFields);
       delayInterval = setInterval(() => {
-        cellChangeStatus(counter, 'success')();
+        // cellChangeStatus(counter, 'success')();
+
         setCounter(counter + 1);
       }, delay || 2000);
     }
@@ -50,19 +65,19 @@ export default connect((state) => {
     return () => {
       clearInterval(delayInterval);
     };
-  }, [gameStart, counter, fieldsLength]);
+  }, [gameStart, counter, fieldsLength, fields, delay]);
 
-  const cellChangeStatus = (id, status) => () => {
-    const tempFields = fields.map((field) => {
-      if (field.id === id) {
-        field.status = status;
-      }
+  // const cellChangeStatus = (id, status) => () => {
+  //   const tempFields = fields.map((field) => {
+  //     if (field.id === id) {
+  //       field.status = status;
+  //     }
 
-      return field;
-    });
+  //     return field;
+  //   });
 
-    setFields(tempFields);
-  };
+  //   setFields(tempFields);
+  // };
 
   const isCatch = (id) => {
     const tempFields = fields.map((field) => {
@@ -76,6 +91,13 @@ export default connect((state) => {
     setFields(tempFields);
   };
 
+  const tryToCatch = () => {
+    const tempFields = [...fields];
+    tempFields[counter].status = 'success';
+
+    setFields(tempFields);
+  };
+
   const boardCells = [];
   for (let i = 0; i < fields.length; i++) {
     boardCells.push(
@@ -84,7 +106,6 @@ export default connect((state) => {
         id={fields[i].id}
         status={fields[i].status}
         counter={counter}
-        cellChangeStatus={cellChangeStatus}
       />
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import StyleCell from './style/StyleCell';
 
-export default function BoardCell({ id, status, counter, cellChangeStatus }) {
+export default function BoardCell({ id, status, counter }) {
   const classes = StyleCell();
 
   const handleChangeStatus = () => {
@@ -22,7 +22,7 @@ export default function BoardCell({ id, status, counter, cellChangeStatus }) {
     <Box
       style={{ backgroundColor: handleChangeStatus() }}
       className={classes.td}
-      onClick={cellChangeStatus(id, 'active')}
+      onClick={() => {}}
     ></Box>
   );
 }
