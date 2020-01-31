@@ -4,6 +4,7 @@ import StoreProvider from './StoreProvider';
 import gameConfiguration from './reducers/gameConfiguration';
 import gameStartFlag from './reducers/gameStartFlag';
 import player from './reducers/player';
+import board from './reducers/board';
 
 export {
   newStore,
@@ -12,5 +13,6 @@ export {
   StoreProvider,
   gameConfiguration,
   gameStartFlag,
-  player
+  player,
+  board
 };

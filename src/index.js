@@ -7,10 +7,11 @@ import {
   StoreProvider,
   gameConfiguration,
   gameStartFlag,
-  player
+  player,
+  board
 } from 'services/Store';
 
-newStore({ gameConfiguration, gameStartFlag, player });
+newStore({ gameConfiguration, gameStartFlag, player, board });
 
 ReactDOM.render(
   <StoreProvider>

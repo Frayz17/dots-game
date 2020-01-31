@@ -8,7 +8,6 @@ const handleFormSubmit = (e) => {
   const { name: playerName } = getState().player;
 
   if (!isObjEmpty(dificultySelected) && playerName.length > 3) {
-    console.log(dificultySelected, playerName);
     getStore().dispatch({
       type: 'GAME_START_SET_TRUE'
     });

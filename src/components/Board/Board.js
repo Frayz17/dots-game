@@ -1,33 +1,32 @@
 import React from 'react';
-// import cellChangeStatus from './functions/cellChangeStatus';
+import { isObjEmpty } from 'functions';
+import { fieldChangeStatus } from './functions';
+import { fieldCounterIncrement } from './functions';
 import Box from '@material-ui/core/Box';
-import { getState, gameStartFlag } from 'services/Store';
+import { getState } from 'services/Store';
 import { connect } from 'react-redux';
 import StyleBoard from './style/StyleBoard';
 import BoardCell from './BoardCell';
-import arrayShuffle from 'functions/arrayShuffle';
+import { setBoardFields } from './functions';
 
 export default connect((state) => {
   return {
     dificultySelected: state.gameConfiguration.dificultySelected,
-    gameStartFlag: state.gameStartFlag
+    gameStartFlag: state.gameStartFlag,
+    fields: state.board.fields,
+    fieldCounter: state.board.fieldCounter,
+    playerScore: state.board
   };
-})(function Board({ dificultySelected, gameStartFlag }) {
-  const [fields, setFields] = React.useState([]);
-  const [counter, setCounter] = React.useState(0);
-  const [score, setScore] = React.useState(0);
+})(function Board({ gameStartFlag, fields, fieldCounter, playerScore }) {
   const classes = StyleBoard()();
+  const dificultySelected = getState().gameConfiguration.dificultySelected;
 
   // init fields
   React.useEffect(() => {
-    const allFields = dificultySelected.field * dificultySelected.field;
-    const collector = [];
-    for (let i = 0; i < allFields; i++) {
-      collector.push({ id: i, status: 'inactive', catch: null });
+    if (!isObjEmpty(dificultySelected)) {
+      setBoardFields();
     }
-
-    setFields(arrayShuffle(collector));
-  }, [dificultySelected.field]);
+  }, [dificultySelected]);
 
   const fieldsLength = fields.length;
   const gameStart = gameStartFlag.gameStart;
@@ -37,47 +36,19 @@ export default connect((state) => {
   React.useEffect(() => {
     let delayInterval;
 
-    const cellChangeStatus = (id, status) => () => {
-      let tempFields = [...fields];
-      tempFields = tempFields.map((field) => {
-        if (field.id === id) {
-          field.status = status;
-        }
+    if (gameStart === true && fieldCounter < fieldsLength) {
+      fieldChangeStatus(fields, fieldCounter, 'active')();
 
-        return field;
-      });
-
-      // setFields(tempFields);
-    };
-
-    if (gameStart === true && counter < fieldsLength) {
-      const newFields = [...fields];
-      newFields[counter] = { ...newFields[counter], status: 'active' };
-      // cellChangeStatus(counter, 'active')();
-      // setFields(newFields);
       delayInterval = setInterval(() => {
-        // cellChangeStatus(counter, 'success')();
-
-        setCounter(counter + 1);
+        fieldChangeStatus(fields, fieldCounter, 'success')();
+        fieldCounterIncrement();
       }, delay || 2000);
     }
 
     return () => {
       clearInterval(delayInterval);
     };
-  }, [gameStart, counter, fieldsLength, fields, delay]);
-
-  // const cellChangeStatus = (id, status) => () => {
-  //   const tempFields = fields.map((field) => {
-  //     if (field.id === id) {
-  //       field.status = status;
-  //     }
-
-  //     return field;
-  //   });
-
-  //   setFields(tempFields);
-  // };
+  }, [fieldCounter, fieldsLength, gameStart]);
 
   const isCatch = (id) => {
     const tempFields = fields.map((field) => {
@@ -88,14 +59,14 @@ export default connect((state) => {
       return field;
     });
 
-    setFields(tempFields);
+    // setFields(tempFields);
   };
 
   const tryToCatch = () => {
     const tempFields = [...fields];
-    tempFields[counter].status = 'success';
+    tempFields[fieldCounter].status = 'success';
 
-    setFields(tempFields);
+    // setFields(tempFields);
   };
 
   const boardCells = [];
@@ -105,14 +76,14 @@ export default connect((state) => {
         key={fields[i].id}
         id={fields[i].id}
         status={fields[i].status}
-        counter={counter}
+        fieldCounter={fieldCounter}
       />
     );
   }
 
   return (
     <Box className={classes.root}>
-      <div className={classes.board}>{boardCells}</div>
+      <Box className={classes.board}>{boardCells}</Box>
     </Box>
   );
 });
