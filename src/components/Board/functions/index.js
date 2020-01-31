@@ -1,5 +1,6 @@
 import fieldChangeStatus from './fieldChangeStatus';
-import setBoardFields from './setBoardFields';
+import BuildBoard from './BuildBoard';
 import fieldCounterIncrement from './fieldCounterIncrement';
+import tryToCatch from './tryToCatch';
 
-export { fieldChangeStatus, setBoardFields, fieldCounterIncrement };
+export { fieldChangeStatus, BuildBoard, fieldCounterIncrement, tryToCatch };

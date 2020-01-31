@@ -1,13 +1,16 @@
 import React from 'react';
-import { isObjEmpty } from 'functions';
-import { fieldChangeStatus } from './functions';
-import { fieldCounterIncrement } from './functions';
+import { isObjEmpty } from 'utils';
+import {
+  fieldChangeStatus,
+  fieldCounterIncrement,
+  tryToCatch
+} from './functions';
 import Box from '@material-ui/core/Box';
 import { getState } from 'services/Store';
 import { connect } from 'react-redux';
 import StyleBoard from './style/StyleBoard';
 import BoardCell from './BoardCell';
-import { setBoardFields } from './functions';
+import { BuildBoard } from './functions';
 
 export default connect((state) => {
   return {
@@ -24,7 +27,7 @@ export default connect((state) => {
   // init fields
   React.useEffect(() => {
     if (!isObjEmpty(dificultySelected)) {
-      setBoardFields();
+      BuildBoard();
     }
   }, [dificultySelected]);
 
@@ -37,10 +40,10 @@ export default connect((state) => {
     let delayInterval;
 
     if (gameStart === true && fieldCounter < fieldsLength) {
-      fieldChangeStatus(fields, fieldCounter, 'active')();
+      fieldChangeStatus(fieldCounter, 'active')();
 
       delayInterval = setInterval(() => {
-        fieldChangeStatus(fields, fieldCounter, 'success')();
+        fieldChangeStatus(fieldCounter, 'fail')();
         fieldCounterIncrement();
       }, delay || 2000);
     }
@@ -48,26 +51,7 @@ export default connect((state) => {
     return () => {
       clearInterval(delayInterval);
     };
-  }, [fieldCounter, fieldsLength, gameStart]);
-
-  const isCatch = (id) => {
-    const tempFields = fields.map((field) => {
-      if (field.id === id && field.status === 'active') {
-        field.status = 'success';
-      }
-
-      return field;
-    });
-
-    // setFields(tempFields);
-  };
-
-  const tryToCatch = () => {
-    const tempFields = [...fields];
-    tempFields[fieldCounter].status = 'success';
-
-    // setFields(tempFields);
-  };
+  }, [delay, fieldCounter, fieldsLength, gameStart]);
 
   const boardCells = [];
   for (let i = 0; i < fields.length; i++) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import StyleCell from './style/StyleCell';
+import { tryToCatch } from './functions';
 
 export default function BoardCell({ id, status, counter }) {
   const classes = StyleCell();
@@ -22,7 +23,7 @@ export default function BoardCell({ id, status, counter }) {
     <Box
       style={{ backgroundColor: handleChangeStatus() }}
       className={classes.td}
-      onClick={() => {}}
+      onClick={tryToCatch(id)}
     ></Box>
   );
 }

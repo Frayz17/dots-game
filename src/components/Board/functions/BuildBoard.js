@@ -1,5 +1,5 @@
 import { getStore, getState } from 'services/Store';
-import arrayShuffle from 'functions/arrayShuffle';
+import { arrayShuffle } from 'utils';
 
 export default () => {
   const fieldsSide = getState().gameConfiguration.dificultySelected.field;

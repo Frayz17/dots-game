@@ -1,5 +1,5 @@
 import { getStore, getState } from 'services/Store';
-import isObjEmpty from 'functions/isObjEmpty';
+import { isObjEmpty } from 'utils';
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
