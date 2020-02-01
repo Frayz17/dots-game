@@ -1,8 +1,9 @@
-import { getStore, getState } from 'services/Store';
+import { getState } from 'services/Store';
 import { arrayShuffle } from 'utils';
+import { setBoardFields } from 'services/Store/reducers/board';
 
 export default () => {
-  const fieldsSide = getState().gameConfiguration.dificultySelected.field;
+  const fieldsSide = getState().gameDificulty.dificultySelected.field;
 
   const allFields = fieldsSide * fieldsSide;
   const collector = [];
@@ -10,8 +11,5 @@ export default () => {
     collector.push({ id: i, status: 'inactive', catch: null });
   }
 
-  getStore().dispatch({
-    type: 'SET_BOARD_FIELDS',
-    payload: arrayShuffle(collector)
-  });
+  setBoardFields(arrayShuffle(collector));
 };

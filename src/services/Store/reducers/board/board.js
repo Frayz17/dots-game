@@ -1,3 +1,10 @@
+import {
+  SET_BOARD_FIELDS,
+  BOARD_FIELD_COUNTER_INCREMENT,
+  BOARD_PLAYER_SCORE_INCREMENT,
+  BOARD_PC_SCORE_INCREMENT
+} from './actionTypes';
+
 export default (
   state = {
     fields: [],
@@ -8,13 +15,13 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case 'SET_BOARD_FIELDS':
+    case SET_BOARD_FIELDS:
       return { ...state, fields: action.payload };
-    case 'BOARD_FIELD_COUNTER_INCREMENT':
+    case BOARD_FIELD_COUNTER_INCREMENT:
       return { ...state, fieldCounter: state.fieldCounter + 1 };
-    case 'BOARD_PLAYER_SCORE_INCREMENT':
+    case BOARD_PLAYER_SCORE_INCREMENT:
       return { ...state, playerScore: state.playerScore + 1 };
-    case 'BOARD_PC_SCORE_INCREMENT':
+    case BOARD_PC_SCORE_INCREMENT:
       return { ...state, pcScore: state.pcScore + 1 };
     default:
       return { ...state };

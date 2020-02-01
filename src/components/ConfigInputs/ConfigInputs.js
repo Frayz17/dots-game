@@ -16,11 +16,11 @@ import styleConfigInputs from './style/styleConfigInputs';
 
 export default connect((state) => {
   return {
-    gameConfiguration: state.gameConfiguration,
+    gameDificulty: state.gameDificulty,
     player: state.player
   };
 })(function ConfigInputs({
-  gameConfiguration: { dificultiesList, dificultySelected },
+  gameDificulty: { dificultiesList, dificultySelected },
   player
 }) {
   const classes = styleConfigInputs();
@@ -35,10 +35,10 @@ export default connect((state) => {
     <Box>
       <form className={classes.form} onSubmit={handleFormSubmit}>
         <FormControl className={classes.formControl}>
-          <InputLabel id="dificulty-select-label">Select Dificulty</InputLabel>
+          <InputLabel id='dificulty-select-label'>Select Dificulty</InputLabel>
           <Select
-            labelId="dificulty-select-label"
-            id="dificulty-select"
+            labelId='dificulty-select-label'
+            id='dificulty-select'
             className={classes.selectDificulty}
             value={dificultySelected}
             onChange={handleSelectDificulty}
@@ -56,7 +56,7 @@ export default connect((state) => {
         <FormControl className={classes.formControl}>
           <TextField
             className={classes.playerNameInput}
-            label="Player Name"
+            label='Player Name'
             onChange={handleSetPlayerName}
             value={player.name}
           />
@@ -65,9 +65,9 @@ export default connect((state) => {
         <FormControl className={classes.formControl}>
           <Button
             className={classes.btnPlay}
-            type="submit"
-            variant="contained"
-            color="primary"
+            type='submit'
+            variant='contained'
+            color='primary'
           >
             play
           </Button>

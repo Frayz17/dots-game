@@ -1,12 +1,10 @@
-import { getStore, getState } from 'services/Store';
+import { getState } from 'services/Store';
+import { setPlayerName } from 'services/Store/reducers/player';
 
 export default (event) => {
-  const { gameStart } = getState().gameStartFlag;
+  const { gameStartFlag } = getState();
 
-  if (!gameStart) {
-    getStore().dispatch({
-      type: 'PLAYER_NAME_SET',
-      payload: event.target.value
-    });
+  if (!gameStartFlag) {
+    setPlayerName(event.target.value);
   }
 };

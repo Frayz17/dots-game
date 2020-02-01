@@ -1,7 +1,8 @@
 import { getStore } from 'services/Store';
+import { GAME_START_SET_FALSE } from './actionTypes';
 
 export default () => {
   getStore().dispatch({
-    type: 'BOARD_FIELD_COUNTER_INCREMENT'
+    type: GAME_START_SET_FALSE
   });
 };

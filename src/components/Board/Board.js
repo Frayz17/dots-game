@@ -1,28 +1,27 @@
 import React from 'react';
-import { isObjEmpty } from 'utils';
-import {
-  fieldChangeStatus,
-  fieldCounterIncrement,
-  tryToCatch
-} from './functions';
-import Box from '@material-ui/core/Box';
-import { getState } from 'services/Store';
 import { connect } from 'react-redux';
-import StyleBoard from './style/StyleBoard';
+import { getState } from 'services/Store';
 import BoardCell from './BoardCell';
-import { BuildBoard } from './functions';
+import { isObjEmpty } from 'utils';
+import { fieldChangeStatus, BuildBoard } from './functions';
+import {
+  fieldCounterIncrement,
+  pcScoreIncrement
+} from 'services/Store/reducers/board';
+import Box from '@material-ui/core/Box';
+import StyleBoard from './style/StyleBoard';
 
 export default connect((state) => {
   return {
-    dificultySelected: state.gameConfiguration.dificultySelected,
+    dificultySelected: state.gameDificulty.dificultySelected,
     gameStartFlag: state.gameStartFlag,
     fields: state.board.fields,
-    fieldCounter: state.board.fieldCounter,
-    playerScore: state.board
+    fieldCounter: state.board.fieldCounter
   };
-})(function Board({ gameStartFlag, fields, fieldCounter, playerScore }) {
+})(function Board({ gameStartFlag, fields, fieldCounter }) {
   const classes = StyleBoard()();
-  const dificultySelected = getState().gameConfiguration.dificultySelected;
+  const { dificultySelected } = getState().gameDificulty;
+  const { playerScore, pcScore } = getState().board;
 
   // init fields
   React.useEffect(() => {
@@ -32,26 +31,28 @@ export default connect((state) => {
   }, [dificultySelected]);
 
   const fieldsLength = fields.length;
-  const gameStart = gameStartFlag.gameStart;
   const delay = dificultySelected.delay;
 
   // game logic
   React.useEffect(() => {
     let delayInterval;
+    const halfOfBoardFields = Math.ceil(fieldsLength / 2);
 
-    if (gameStart === true && fieldCounter < fieldsLength) {
+    if (playerScore >= halfOfBoardFields || pcScore >= halfOfBoardFields) {
+    } else if (gameStartFlag === true && fieldCounter < fieldsLength) {
       fieldChangeStatus(fieldCounter, 'active')();
 
       delayInterval = setInterval(() => {
         fieldChangeStatus(fieldCounter, 'fail')();
         fieldCounterIncrement();
+        pcScoreIncrement();
       }, delay || 2000);
     }
 
     return () => {
       clearInterval(delayInterval);
     };
-  }, [delay, fieldCounter, fieldsLength, gameStart]);
+  }, [delay, fieldCounter, fieldsLength, gameStartFlag, pcScore, playerScore]);
 
   const boardCells = [];
   for (let i = 0; i < fields.length; i++) {

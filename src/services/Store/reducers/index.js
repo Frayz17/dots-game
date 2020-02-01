@@ -1,6 +1,6 @@
 import board from './board';
-import gameConfiguration from './gameConfiguration';
+import gameDificulty from './gameDificulty';
 import gameStartFlag from './gameStartFlag';
 import player from './player';
 
-export { board, gameConfiguration, gameStartFlag, player };
+export { board, gameDificulty, gameStartFlag, player };

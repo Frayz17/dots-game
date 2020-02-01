@@ -4,7 +4,8 @@ import DotsGame from 'modules/DotsGame';
 import Footer from 'components/Footer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
-import useStyles from './style/useStyles';
+import './style/global.css';
+import { useStyles } from './style';
 import 'typeface-roboto';
 
 function App() {

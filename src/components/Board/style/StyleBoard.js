@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export default () => {
   const {
     dificultySelected: { field }
-  } = getState().gameConfiguration;
+  } = getState().gameDificulty;
 
   const boardSize = 450;
   const coefficient = 0.8;

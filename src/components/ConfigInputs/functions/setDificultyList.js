@@ -1,4 +1,4 @@
-import { getStore } from 'services/Store';
+import { setGameDificultyList } from 'services/Store/reducers/gameDificulty';
 import axios from 'axios';
 
 export default async (event) => {
@@ -7,10 +7,7 @@ export default async (event) => {
       'https://starnavi-frontend-test-task.herokuapp.com/game-settings'
     );
 
-    getStore().dispatch({
-      type: 'GAME_DIFICULTY_LIST_SET',
-      payload: result.data
-    });
+    setGameDificultyList(result.data);
   } catch (error) {
     console.error(error);
   }

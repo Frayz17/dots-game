@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from 'App';
 import {
   newStore,
   StoreProvider,
-  gameConfiguration,
+  gameDificulty,
   gameStartFlag,
   player,
   board
 } from 'services/Store';
 
-newStore({ gameConfiguration, gameStartFlag, player, board });
+newStore({ gameDificulty, gameStartFlag, player, board });
 
 ReactDOM.render(
   <StoreProvider>

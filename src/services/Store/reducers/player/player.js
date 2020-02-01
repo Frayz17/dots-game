@@ -1,3 +1,5 @@
+import { PLAYER_NAME_SET, PLAYER_WINNER_FLAG_SET } from './actionTypes';
+
 export default (
   state = {
     name: '',
@@ -7,9 +9,9 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case 'PLAYER_NAME_SET':
+    case PLAYER_NAME_SET:
       return { ...state, name: action.payload };
-    case 'PLAYER_WINNER_FLAG_SET':
+    case PLAYER_WINNER_FLAG_SET:
       return { ...state, winnerFlag: action.payload };
     case 'PLAYER_TIME_SET':
       return { ...state, time: action.payload };

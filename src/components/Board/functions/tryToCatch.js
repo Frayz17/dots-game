@@ -1,12 +1,16 @@
-import { getStore, getState } from 'services/Store';
-import fieldCounterIncrement from './fieldCounterIncrement';
+import { getState } from 'services/Store';
+import {
+  fieldCounterIncrement,
+  playerScoreIncrement
+} from 'services/Store/reducers/board';
+import { setBoardFields } from 'services/Store/reducers/board';
 
 export default (id) => () => {
   const { fieldCounter, fields } = getState().board;
-  const { gameStart } = getState().gameStartFlag;
+  const { gameStartFlag } = getState();
 
-  if (fieldCounter === id && gameStart === true) {
-    const tempFields = fields.map((field) => {
+  if (fieldCounter === id && gameStartFlag === true) {
+    const updatedFields = fields.map((field) => {
       if (field.id === id) {
         field.status = 'success';
       }
@@ -14,10 +18,8 @@ export default (id) => () => {
       return field;
     });
 
-    getStore().dispatch({
-      type: 'SET_BOARD_FIELDS',
-      payload: tempFields
-    });
+    setBoardFields(updatedFields);
     fieldCounterIncrement();
+    playerScoreIncrement();
   }
 };

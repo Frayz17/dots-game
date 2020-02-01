@@ -1,12 +1,10 @@
-import { getStore, getState } from 'services/Store';
+import { getState } from 'services/Store';
+import { chooseGameDificulty } from 'services/Store/reducers/gameDificulty';
 
 export default (event) => {
-  const { gameStart } = getState().gameStartFlag;
+  const { gameStartFlag } = getState();
 
-  if (!gameStart) {
-    getStore().dispatch({
-      type: 'GAME_DIFICULTY_CHOOSE',
-      payload: event.target.value
-    });
+  if (!gameStartFlag) {
+    chooseGameDificulty(event.target.value);
   }
 };
