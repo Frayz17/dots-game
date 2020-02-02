@@ -1,19 +1,34 @@
-import { PLAYER_NAME_SET, PLAYER_WINNER_FLAG_SET } from './actionTypes';
+import {
+  PLAYER_NAME_SET,
+  PLAYER_SET_WINNER_FLAG_TRUE,
+  PLAYER_SET_WINNER_FLAG_FALSE,
+  PLAYER_SET_TIME_START_PLAY,
+  PLAYER_SET_TIME_END_PLAY,
+  PLAYER_SET_TIME_SCORE
+} from './actionTypes';
 
 export default (
   state = {
     name: '',
     winnerFlag: null,
-    time: null
+    timeStartPlay: 0,
+    timeEndPlay: 0,
+    timeScore: null
   },
   action
 ) => {
   switch (action.type) {
     case PLAYER_NAME_SET:
       return { ...state, name: action.payload };
-    case PLAYER_WINNER_FLAG_SET:
-      return { ...state, winnerFlag: action.payload };
-    case 'PLAYER_TIME_SET':
+    case PLAYER_SET_WINNER_FLAG_TRUE:
+      return { ...state, winnerFlag: true };
+    case PLAYER_SET_WINNER_FLAG_FALSE:
+      return { ...state, winnerFlag: false };
+    case PLAYER_SET_TIME_START_PLAY:
+      return { ...state, timeStartPlay: new Date().getTime() };
+    case PLAYER_SET_TIME_END_PLAY:
+      return { ...state, timeEndPlay: new Date().getTime() };
+    case PLAYER_SET_TIME_SCORE:
       return { ...state, time: action.payload };
     default:
       return { ...state };

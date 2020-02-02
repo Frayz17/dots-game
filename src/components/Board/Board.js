@@ -8,6 +8,12 @@ import {
   fieldCounterIncrement,
   pcScoreIncrement
 } from 'services/Store/reducers/board';
+import {
+  setPlayerWin,
+  setPlayerLoose,
+  setPlayerTimeStartPlay,
+  setPlayerTimeEndPlay
+} from 'services/Store/reducers/player';
 import Box from '@material-ui/core/Box';
 import StyleBoard from './style/StyleBoard';
 
@@ -22,6 +28,8 @@ export default connect((state) => {
   const classes = StyleBoard()();
   const { dificultySelected } = getState().gameDificulty;
   const { playerScore, pcScore } = getState().board;
+  const fieldsLength = fields.length;
+  const delay = dificultySelected.delay;
 
   // init fields
   React.useEffect(() => {
@@ -30,15 +38,24 @@ export default connect((state) => {
     }
   }, [dificultySelected]);
 
-  const fieldsLength = fields.length;
-  const delay = dificultySelected.delay;
+  // init fields
+  React.useEffect(() => {
+    if (gameStartFlag) {
+      setPlayerTimeStartPlay();
+    }
+  }, [gameStartFlag]);
 
   // game logic
   React.useEffect(() => {
     let delayInterval;
     const halfOfBoardFields = Math.ceil(fieldsLength / 2);
 
-    if (playerScore >= halfOfBoardFields || pcScore >= halfOfBoardFields) {
+    if (playerScore >= halfOfBoardFields) {
+      setPlayerWin();
+      setPlayerTimeEndPlay();
+      // sendResultToServer(timeScore)
+    } else if (pcScore >= halfOfBoardFields) {
+      setPlayerLoose();
     } else if (gameStartFlag === true && fieldCounter < fieldsLength) {
       fieldChangeStatus(fieldCounter, 'active')();
 
