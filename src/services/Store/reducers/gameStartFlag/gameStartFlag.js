@@ -1,11 +1,17 @@
-import { GAME_START_SET_TRUE, GAME_START_SET_FALSE } from './actionTypes';
+import {
+  GAME_START_SET_START,
+  GAME_START_SET_STOP,
+  GAME_START_FLAG_RESET
+} from './actionTypes';
 
-export default (state = false, action) => {
+export default (state = 'notstarted', action) => {
   switch (action.type) {
-    case GAME_START_SET_TRUE:
-      return true;
-    case GAME_START_SET_FALSE:
-      return false;
+    case GAME_START_SET_START:
+      return 'start';
+    case GAME_START_SET_STOP:
+      return 'stop';
+    case GAME_START_FLAG_RESET:
+      return 'notstarted';
     default:
       return state;
   }

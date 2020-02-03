@@ -4,7 +4,7 @@ import { setPlayerName } from 'services/Store/reducers/player';
 export default (event) => {
   const { gameStartFlag } = getState();
 
-  if (!gameStartFlag) {
+  if (gameStartFlag === 'notstarted') {
     setPlayerName(event.target.value);
   }
 };

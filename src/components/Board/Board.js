@@ -3,16 +3,23 @@ import { connect } from 'react-redux';
 import { getState } from 'services/Store';
 import BoardCell from './BoardCell';
 import { isObjEmpty } from 'utils';
-import { fieldChangeStatus, BuildBoard } from './functions';
+import {
+  fieldChangeStatus,
+  BuildBoard,
+  // getPlayerTimeScore,
+  // sendResultToServer,
+  handlerPlayerWin
+} from './functions';
 import {
   fieldCounterIncrement,
   pcScoreIncrement
 } from 'services/Store/reducers/board';
 import {
-  setPlayerWin,
+  // setPlayerWin,
   setPlayerLoose,
-  setPlayerTimeStartPlay,
-  setPlayerTimeEndPlay
+  setPlayerTimeStartPlay
+  // setPlayerTimeEndPlay,
+  // setPlayerTimeScore
 } from 'services/Store/reducers/player';
 import Box from '@material-ui/core/Box';
 import StyleBoard from './style/StyleBoard';
@@ -28,6 +35,7 @@ export default connect((state) => {
   const classes = StyleBoard()();
   const { dificultySelected } = getState().gameDificulty;
   const { playerScore, pcScore } = getState().board;
+  const { timeStartPlay, timeEndPlay, timeScore } = getState().player;
   const fieldsLength = fields.length;
   const delay = dificultySelected.delay;
 
@@ -40,7 +48,7 @@ export default connect((state) => {
 
   // init fields
   React.useEffect(() => {
-    if (gameStartFlag) {
+    if (gameStartFlag === 'start') {
       setPlayerTimeStartPlay();
     }
   }, [gameStartFlag]);
@@ -50,26 +58,34 @@ export default connect((state) => {
     let delayInterval;
     const halfOfBoardFields = Math.ceil(fieldsLength / 2);
 
-    if (playerScore >= halfOfBoardFields) {
-      setPlayerWin();
-      setPlayerTimeEndPlay();
-      // sendResultToServer(timeScore)
-    } else if (pcScore >= halfOfBoardFields) {
-      setPlayerLoose();
-    } else if (gameStartFlag === true && fieldCounter < fieldsLength) {
-      fieldChangeStatus(fieldCounter, 'active')();
+    if (gameStartFlag === 'start') {
+      if (playerScore >= halfOfBoardFields && halfOfBoardFields > 0) {
+        handlerPlayerWin();
+      } else if (pcScore >= halfOfBoardFields) {
+        setPlayerLoose();
+      } else if (fieldCounter <= fieldsLength) {
+        fieldChangeStatus(fieldCounter, 'active')();
 
-      delayInterval = setInterval(() => {
-        fieldChangeStatus(fieldCounter, 'fail')();
-        fieldCounterIncrement();
-        pcScoreIncrement();
-      }, delay || 2000);
+        delayInterval = setInterval(() => {
+          fieldChangeStatus(fieldCounter, 'fail')();
+          fieldCounterIncrement();
+          pcScoreIncrement();
+        }, delay || 2000);
+      }
     }
 
     return () => {
       clearInterval(delayInterval);
     };
-  }, [delay, fieldCounter, fieldsLength, gameStartFlag, pcScore, playerScore]);
+  }, [
+    delay,
+    fieldCounter,
+    fieldsLength,
+    gameStartFlag,
+    pcScore,
+    playerScore,
+    timeScore
+  ]);
 
   const boardCells = [];
   for (let i = 0; i < fields.length; i++) {

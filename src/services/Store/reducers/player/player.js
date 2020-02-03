@@ -29,7 +29,7 @@ export default (
     case PLAYER_SET_TIME_END_PLAY:
       return { ...state, timeEndPlay: new Date().getTime() };
     case PLAYER_SET_TIME_SCORE:
-      return { ...state, time: action.payload };
+      return { ...state, timeScore: action.payload };
     default:
       return { ...state };
   }

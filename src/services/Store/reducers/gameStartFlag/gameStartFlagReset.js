@@ -1,8 +1,8 @@
 import { getStore } from 'services/Store';
-import { GAME_START_SET_START } from './actionTypes';
+import { GAME_START_FLAG_RESET } from './actionTypes';
 
 export default () => {
   getStore().dispatch({
-    type: GAME_START_SET_START
+    type: GAME_START_FLAG_RESET
   });
 };

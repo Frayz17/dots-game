@@ -4,6 +4,7 @@ import setPlayerWin from './setPlayerWin';
 import setPlayerLoose from './setPlayerLoose';
 import setPlayerTimeStartPlay from './setPlayerTimeStartPlay';
 import setPlayerTimeEndPlay from './setPlayerTimeEndPlay';
+import setPlayerTimeScore from './setPlayerTimeScore';
 
 export default player;
 
@@ -12,5 +13,6 @@ export {
   setPlayerWin,
   setPlayerLoose,
   setPlayerTimeStartPlay,
-  setPlayerTimeEndPlay
+  setPlayerTimeEndPlay,
+  setPlayerTimeScore
 };

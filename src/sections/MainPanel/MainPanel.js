@@ -13,6 +13,7 @@ export default connect((state) => {
     <Box>
       <ConfigInputs />
       {/* {gameStartFlag ? <Board /> : null} */}
+      {gameStartFlag === 'stop' && <div>hello</div>}
       <Board />
     </Box>
   );
