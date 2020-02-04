@@ -4,7 +4,8 @@ import {
   PLAYER_SET_WINNER_FLAG_FALSE,
   PLAYER_SET_TIME_START_PLAY,
   PLAYER_SET_TIME_END_PLAY,
-  PLAYER_SET_TIME_SCORE
+  PLAYER_SET_TIME_SCORE,
+  PLAYER_RESET
 } from './actionTypes';
 
 export default (
@@ -30,6 +31,14 @@ export default (
       return { ...state, timeEndPlay: new Date().getTime() };
     case PLAYER_SET_TIME_SCORE:
       return { ...state, timeScore: action.payload };
+    case PLAYER_RESET:
+      return {
+        name: '',
+        winnerFlag: null,
+        timeStartPlay: 0,
+        timeEndPlay: 0,
+        timeScore: null
+      };
     default:
       return { ...state };
   }

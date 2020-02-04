@@ -16,7 +16,7 @@ const styleConfigInputs = makeStyles((theme) => {
     playerNameInput: {
       width: 180
     },
-    btnPlay: {
+    btnSubmit: {
       width: 120
     },
     '@media (max-width: 490px)': {
@@ -30,7 +30,7 @@ const styleConfigInputs = makeStyles((theme) => {
       playerNameInput: {
         width: 250
       },
-      btnPlay: {
+      btnSubmit: {
         width: 250
       }
     }

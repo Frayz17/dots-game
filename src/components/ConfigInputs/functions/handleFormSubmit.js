@@ -1,15 +1,28 @@
 import { getState } from 'services/Store';
 import { isObjEmpty } from 'utils';
-import { gameStart } from 'services/Store/reducers/gameStartFlag';
+import {
+  gameStart,
+  gameStartFlagReset
+} from 'services/Store/reducers/gameStartFlag';
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
 
   const { dificultySelected } = getState().gameDificulty;
   const { name: playerName } = getState().player;
+  const { gameStartFlag } = getState();
 
-  if (!isObjEmpty(dificultySelected) && playerName.length > 3) {
+  console.log(gameStartFlag === 'start');
+
+  if (
+    !isObjEmpty(dificultySelected) &&
+    playerName.length > 3 &&
+    gameStartFlag !== 'start'
+  ) {
     gameStart();
+  }
+  if (gameStartFlag === 'start') {
+    gameStartFlagReset();
   }
 };
 

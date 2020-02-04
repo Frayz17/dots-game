@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import SubmitBtn from './SubmitBtn';
 import handleSelectDificulty from './functions/handleSelectDificulty';
 import setDificultyList from './functions/setDificultyList';
 import handleSetPlayerName from './functions/handleSetPlayerName';
@@ -11,7 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import styleConfigInputs from './style/styleConfigInputs';
 
 export default connect((state) => {
@@ -63,14 +63,7 @@ export default connect((state) => {
         </FormControl>
 
         <FormControl className={classes.formControl}>
-          <Button
-            className={classes.btnPlay}
-            type='submit'
-            variant='contained'
-            color='primary'
-          >
-            play
-          </Button>
+          <SubmitBtn />
         </FormControl>
       </form>
     </Box>

@@ -6,11 +6,13 @@ import { isObjEmpty } from 'utils';
 import { fieldChangeStatus, BuildBoard, handlerPlayerWin } from './functions';
 import {
   fieldCounterIncrement,
-  pcScoreIncrement
+  pcScoreIncrement,
+  boardReset
 } from 'services/Store/reducers/board';
 import {
   setPlayerLoose,
-  setPlayerTimeStartPlay
+  setPlayerTimeStartPlay,
+  player_reset
 } from 'services/Store/reducers/player';
 import { gameStop } from 'services/Store/reducers/gameStartFlag';
 import Box from '@material-ui/core/Box';
@@ -43,7 +45,11 @@ export default connect((state) => {
     if (gameStartFlag === 'start') {
       setPlayerTimeStartPlay();
     }
-  }, [gameStartFlag]);
+    if (gameStartFlag === 'notstarted' && fieldCounter > 0) {
+      boardReset();
+      player_reset();
+    }
+  }, [fieldCounter, gameStartFlag]);
 
   // game logic
   React.useEffect(() => {
