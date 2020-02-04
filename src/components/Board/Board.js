@@ -3,24 +3,16 @@ import { connect } from 'react-redux';
 import { getState } from 'services/Store';
 import BoardCell from './BoardCell';
 import { isObjEmpty } from 'utils';
-import {
-  fieldChangeStatus,
-  BuildBoard,
-  // getPlayerTimeScore,
-  // sendResultToServer,
-  handlerPlayerWin
-} from './functions';
+import { fieldChangeStatus, BuildBoard, handlerPlayerWin } from './functions';
 import {
   fieldCounterIncrement,
   pcScoreIncrement
 } from 'services/Store/reducers/board';
 import {
-  // setPlayerWin,
   setPlayerLoose,
   setPlayerTimeStartPlay
-  // setPlayerTimeEndPlay,
-  // setPlayerTimeScore
 } from 'services/Store/reducers/player';
+import { gameStop } from 'services/Store/reducers/gameStartFlag';
 import Box from '@material-ui/core/Box';
 import StyleBoard from './style/StyleBoard';
 
@@ -60,14 +52,17 @@ export default connect((state) => {
 
     if (gameStartFlag === 'start') {
       if (playerScore >= halfOfBoardFields && halfOfBoardFields > 0) {
+        gameStop();
         handlerPlayerWin();
       } else if (pcScore >= halfOfBoardFields) {
+        gameStop();
         setPlayerLoose();
+        fieldChangeStatus(fieldCounter, '');
       } else if (fieldCounter <= fieldsLength) {
-        fieldChangeStatus(fieldCounter, 'active')();
+        fieldChangeStatus(fieldCounter, 'active');
 
         delayInterval = setInterval(() => {
-          fieldChangeStatus(fieldCounter, 'fail')();
+          fieldChangeStatus(fieldCounter, 'fail');
           fieldCounterIncrement();
           pcScoreIncrement();
         }, delay || 2000);
