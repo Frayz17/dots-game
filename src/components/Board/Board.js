@@ -33,10 +33,10 @@ export default connect((state) => {
 
   // init fields
   React.useEffect(() => {
-    if (!isObjEmpty(dificultySelected)) {
+    if (!isObjEmpty(dificultySelected) && gameStartFlag === 'notstarted') {
       BuildBoard();
     }
-  }, [dificultySelected]);
+  }, [dificultySelected, gameStartFlag]);
 
   // init fields
   React.useEffect(() => {
@@ -51,10 +51,9 @@ export default connect((state) => {
     const halfOfBoardFields = Math.ceil(fieldsLength / 2);
 
     if (gameStartFlag === 'start') {
-      if (playerScore >= halfOfBoardFields && halfOfBoardFields > 0) {
-        gameStop();
+      if (playerScore > halfOfBoardFields && halfOfBoardFields > 0) {
         handlerPlayerWin();
-      } else if (pcScore >= halfOfBoardFields) {
+      } else if (pcScore > halfOfBoardFields && halfOfBoardFields > 0) {
         gameStop();
         setPlayerLoose();
         fieldChangeStatus(fieldCounter, '');
@@ -69,6 +68,7 @@ export default connect((state) => {
       }
     }
 
+    // unmount
     return () => {
       clearInterval(delayInterval);
     };
