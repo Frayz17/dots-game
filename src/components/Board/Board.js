@@ -6,13 +6,11 @@ import { isObjEmpty } from 'utils';
 import { fieldChangeStatus, BuildBoard, handlerPlayerWin } from './functions';
 import {
   fieldCounterIncrement,
-  pcScoreIncrement,
-  boardReset
+  pcScoreIncrement
 } from 'services/Store/reducers/board';
 import {
   setPlayerLoose,
-  setPlayerTimeStartPlay,
-  player_reset
+  setPlayerTimeStartPlay
 } from 'services/Store/reducers/player';
 import { gameStop } from 'services/Store/reducers/gameStartFlag';
 import Box from '@material-ui/core/Box';
@@ -29,7 +27,7 @@ export default connect((state) => {
   const classes = StyleBoard()();
   const { dificultySelected } = getState().gameDificulty;
   const { playerScore, pcScore } = getState().board;
-  const { timeStartPlay, timeEndPlay, timeScore } = getState().player;
+  const { timeScore } = getState().player;
   const fieldsLength = fields.length;
   const delay = dificultySelected.delay;
 
@@ -44,10 +42,6 @@ export default connect((state) => {
   React.useEffect(() => {
     if (gameStartFlag === 'start') {
       setPlayerTimeStartPlay();
-    }
-    if (gameStartFlag === 'notstarted' && fieldCounter > 0) {
-      boardReset();
-      player_reset();
     }
   }, [fieldCounter, gameStartFlag]);
 

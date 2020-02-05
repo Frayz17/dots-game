@@ -13,12 +13,10 @@ export default connect((state) => {
   };
 })(function MainPanel({ gameStartFlag, winnerFlag }) {
   const { name } = getState().player;
+
   let text = '';
-
-  console.log('gameStartFlag', gameStartFlag);
-  console.log('winnerFlag', winnerFlag);
-
   let resultGameMsg = '';
+
   if (winnerFlag === true) {
     resultGameMsg = `Player ${name} is winner!`;
   } else if (winnerFlag === false) {
@@ -42,7 +40,6 @@ export default connect((state) => {
   return (
     <Box>
       <ConfigInputs />
-      {/* {gameStartFlag ? <Board /> : null} */}
       <InfoText text={text} />
       <Board />
     </Box>

@@ -14,15 +14,15 @@ export default connect((state) => {
   let text = 'play';
 
   if (gameStartFlag === 'start' || gameStartFlag === 'stop') {
-    text = 'reset';
+    text = 'play again';
   }
 
   return (
     <Button
       className={classes.btnSubmit}
-      type='submit'
-      variant='contained'
-      color='primary'
+      type="submit"
+      variant="contained"
+      color="primary"
     >
       {text}
     </Button>

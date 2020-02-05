@@ -1,26 +1,21 @@
 import React from 'react';
-import LeaderList from './LeadersList';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '15px 0'
-  },
-  title: {
-    textAlign: 'center'
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }));
 
-export default function InfoPanel() {
+export default function Leader({ name, date }) {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <Typography className={classes.title} variant={'h4'}>
-        Leader Board
-      </Typography>
-      <LeaderList />
+      <Typography variant={'subtitle2'}>{name}</Typography>
+      <Typography variant={'subtitle2'}>{date}</Typography>
     </Box>
   );
 }
