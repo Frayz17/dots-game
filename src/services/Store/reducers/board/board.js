@@ -4,7 +4,7 @@ import {
   BOARD_PLAYER_SCORE_INCREMENT,
   BOARD_PC_SCORE_INCREMENT,
   BOARD_RESET
-} from './actionTypes';
+} from './actions/actionTypes';
 
 export default (
   state = {

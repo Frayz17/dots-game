@@ -1,9 +1,11 @@
 import board from './board';
-import pcScoreIncrement from './pcScoreIncrement';
-import playerScoreIncrement from './playerScoreIncrement';
-import fieldCounterIncrement from './fieldCounterIncrement';
-import setBoardFields from './setBoardFields';
-import boardReset from './boardReset';
+import {
+  pcScoreIncrement,
+  playerScoreIncrement,
+  fieldCounterIncrement,
+  setBoardFields,
+  boardReset
+} from './actions';
 
 export default board;
 
