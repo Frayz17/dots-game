@@ -1,11 +1,13 @@
 import player from './player';
-import setPlayerName from './setPlayerName';
-import setPlayerWin from './setPlayerWin';
-import setPlayerLoose from './setPlayerLoose';
-import setPlayerTimeStartPlay from './setPlayerTimeStartPlay';
-import setPlayerTimeEndPlay from './setPlayerTimeEndPlay';
-import setPlayerTimeScore from './setPlayerTimeScore';
-import player_reset from './player_reset';
+import {
+  setPlayerName,
+  setPlayerWin,
+  setPlayerLoose,
+  setPlayerTimeStartPlay,
+  setPlayerTimeEndPlay,
+  setPlayerTimeScore,
+  playerReset
+} from './actions';
 
 export default player;
 
@@ -16,5 +18,5 @@ export {
   setPlayerTimeStartPlay,
   setPlayerTimeEndPlay,
   setPlayerTimeScore,
-  player_reset
+  playerReset
 };

@@ -1,4 +1,7 @@
-import { GAME_DIFICULTY_LIST_SET, GAME_DIFICULTY_CHOOSE } from './actionTypes';
+import {
+  GAME_DIFICULTY_LIST_SET,
+  GAME_DIFICULTY_CHOOSE
+} from './actions/actionTypes';
 
 export default (
   state = {

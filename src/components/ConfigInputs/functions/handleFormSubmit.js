@@ -5,7 +5,7 @@ import {
   gameStartFlagReset
 } from 'services/Store/reducers/gameStartFlag';
 import { boardReset } from 'services/Store/reducers/board';
-import { player_reset } from 'services/Store/reducers/player';
+import { playerReset } from 'services/Store/reducers/player';
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
@@ -13,8 +13,6 @@ const handleFormSubmit = (e) => {
   const { dificultySelected } = getState().gameDificulty;
   const { name: playerName } = getState().player;
   const { gameStartFlag } = getState();
-
-  console.log(gameStartFlag === 'start');
 
   if (
     !isObjEmpty(dificultySelected) &&
@@ -26,7 +24,7 @@ const handleFormSubmit = (e) => {
   if (gameStartFlag === 'start' || gameStartFlag === 'stop') {
     gameStartFlagReset();
     boardReset();
-    player_reset();
+    playerReset();
   }
 };
 

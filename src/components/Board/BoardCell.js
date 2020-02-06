@@ -14,6 +14,7 @@ export default function BoardCell({ id, status, counter }) {
         return 'green';
       case 'fail':
         return 'red';
+      case 'inactive':
       default:
         return 'white';
     }

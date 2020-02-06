@@ -1,6 +1,5 @@
 import gameDificulty from './gameDificulty';
-import chooseGameDificulty from './chooseGameDificulty';
-import setGameDificultyList from './setGameDificultyList';
+import { chooseGameDificulty, setGameDificultyList } from './actions';
 
 export default gameDificulty;
 

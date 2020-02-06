@@ -6,7 +6,7 @@ import {
   PLAYER_SET_TIME_END_PLAY,
   PLAYER_SET_TIME_SCORE,
   PLAYER_RESET
-} from './actionTypes';
+} from './actions/actionTypes';
 
 export default (
   state = {

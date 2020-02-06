@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { getState } from 'services/Store';
 import BoardCell from './BoardCell';
 import { isObjEmpty } from 'utils';
-import { fieldChangeStatus, BuildBoard, handlerPlayerWin } from './functions';
+import { fieldChangeStatus, BuildBoard } from './functions';
+import {
+  handlerPlayerWin,
+  handlerPlayerLoose
+} from 'modules/DotsGame/functions';
 import {
   fieldCounterIncrement,
   pcScoreIncrement
 } from 'services/Store/reducers/board';
-import {
-  setPlayerLoose,
-  setPlayerTimeStartPlay
-} from 'services/Store/reducers/player';
-import { gameStop } from 'services/Store/reducers/gameStartFlag';
+import { setPlayerTimeStartPlay } from 'services/Store/reducers/player';
 import Box from '@material-ui/core/Box';
 import StyleBoard from './style/StyleBoard';
 
@@ -54,9 +54,8 @@ export default connect((state) => {
       if (playerScore > halfOfBoardFields && halfOfBoardFields > 0) {
         handlerPlayerWin();
       } else if (pcScore > halfOfBoardFields && halfOfBoardFields > 0) {
-        gameStop();
-        setPlayerLoose();
-        fieldChangeStatus(fieldCounter, '');
+        handlerPlayerLoose();
+        fieldChangeStatus(fieldCounter, 'inactive');
       } else if (fieldCounter <= fieldsLength) {
         fieldChangeStatus(fieldCounter, 'active');
 
