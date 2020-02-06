@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { refreshLeadersListToStore } from 'sections/InfoPanel/functions';
 import { getState } from 'services/Store';
 import { getCurrentDate } from 'utils';
 
@@ -14,6 +15,7 @@ export default async () => {
           date: getCurrentDate()
         }
       );
+      refreshLeadersListToStore();
     } catch (error) {
       console.log('cant send data to server ', error);
     }

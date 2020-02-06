@@ -1,4 +1,4 @@
-import sendResultToServer from './sendResultToServer';
+import updateServerWinners from './updateServerWinners';
 import {
   setPlayerWin,
   setPlayerTimeEndPlay,
@@ -11,5 +11,5 @@ export default () => {
   setPlayerTimeEndPlay();
   setPlayerWin();
   setPlayerTimeScore();
-  sendResultToServer();
+  updateServerWinners();
 };

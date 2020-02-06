@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Leader from './Leader';
-import getLeadersList from './functions/getLeadersList';
+import { refreshLeadersListToStore } from './functions';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -19,21 +19,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default connect((state) => {
   return {
-    gameStartFlag: state.gameStartFlag
+    gameStartFlag: state.gameStartFlag,
+    leadersList: state.leadersList
   };
-})(function LeadersList({ gameStartFlag }) {
-  const [leadersList, setLeadersList] = React.useState([]);
+})(function LeadersList({ gameStartFlag, leadersList }) {
   const classes = useStyles();
 
   React.useEffect(() => {
-    console.log(gameStartFlag);
-    (async () => {
-      const list = await getLeadersList();
-      list.reverse();
-
-      console.log('>>>>>>>>>>>');
-      setLeadersList(list);
-    })();
+    refreshLeadersListToStore();
   }, [gameStartFlag]);
 
   return (

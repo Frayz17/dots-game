@@ -5,6 +5,7 @@ import gameDificulty from './reducers/gameDificulty';
 import gameStartFlag from './reducers/gameStartFlag';
 import player from './reducers/player';
 import board from './reducers/board';
+import leadersList from './reducers/leadersList';
 
 export {
   newStore,
@@ -14,5 +15,6 @@ export {
   gameDificulty,
   gameStartFlag,
   player,
-  board
+  board,
+  leadersList
 };
