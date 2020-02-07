@@ -9,11 +9,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function InfoPanel() {
+export default React.memo(function InfoPanel() {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
       <LeadersList />
     </Box>
   );
-}
+});

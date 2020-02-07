@@ -6,7 +6,7 @@ import {
 export default (
   state = {
     dificultiesList: {},
-    dificultySelected: ''
+    dificultySelected: { field: 10, delay: 1000, name: 'normalMode' }
   },
   action
 ) => {

@@ -43,7 +43,7 @@ export default connect((state) => {
     if (gameStartFlag === 'start') {
       setPlayerTimeStartPlay();
     }
-  }, [fieldCounter, gameStartFlag]);
+  }, [gameStartFlag]);
 
   // game logic
   React.useEffect(() => {

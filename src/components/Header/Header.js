@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './style/useStyles';
 
-export default function Header() {
+export default React.memo(function Header() {
   const classes = useStyles();
   return (
     <AppBar position='static'>
@@ -13,4 +13,4 @@ export default function Header() {
       </Toolbar>
     </AppBar>
   );
-}
+});

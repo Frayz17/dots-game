@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Leader({ name, date }) {
+export default React.memo(function Leader({ name, date }) {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
@@ -18,4 +18,4 @@ export default function Leader({ name, date }) {
       <Typography variant={'subtitle2'}>{date}</Typography>
     </Box>
   );
-}
+});

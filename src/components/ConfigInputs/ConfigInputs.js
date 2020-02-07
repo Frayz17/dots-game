@@ -21,70 +21,74 @@ export default connect((state) => {
     gameDificulty: state.gameDificulty,
     player: state.player
   };
-})(function ConfigInputs({
-  gameDificulty: { dificultiesList, dificultySelected },
-  player
-}) {
-  const classes = styleConfigInputs();
+})(
+  React.memo(function ConfigInputs({
+    gameDificulty: { dificultiesList, dificultySelected },
+    player
+  }) {
+    const classes = styleConfigInputs();
 
-  const isSubmitEnabled =
-    player.name.length > 3 &&
-    dificultySelected !== '' &&
-    !isObjEmpty(dificultySelected);
+    const isSubmitEnabled =
+      player.name.length > 3 &&
+      dificultySelected !== '' &&
+      !isObjEmpty(dificultySelected);
 
-  React.useEffect(() => {
-    setDificultyList();
-  }, []);
+    React.useEffect(() => {
+      setDificultyList();
+    }, []);
 
-  const dificultiesName = Object.keys(dificultiesList);
+    const dificultiesName = Object.keys(dificultiesList);
 
-  return (
-    <Box>
-      <form
-        className={classes.form}
-        onSubmit={handleFormSubmit(isSubmitEnabled)}
-      >
-        <FormControl required className={classes.formControl}>
-          <InputLabel id='dificulty-select-label'>Select Dificulty</InputLabel>
-          <Select
-            labelId='dificulty-select-label'
-            id='dificulty-select'
-            className={classes.selectDificulty}
-            value={dificultySelected}
-            onChange={handleSelectDificulty}
+    return (
+      <Box>
+        {!isObjEmpty(dificultiesList) ? (
+          <form
+            className={classes.form}
+            onSubmit={handleFormSubmit(isSubmitEnabled)}
           >
-            {dificultiesName.map((name) => {
-              const dificulty = { ...dificultiesList[name], name };
-              console.log(dificulty);
-              return (
-                <MenuItem key={name} value={dificultiesList[name]}>
-                  {stringFormatter(name)}
-                </MenuItem>
-              );
-            })}
-          </Select>
-          <FormHelperText>choose dificulty</FormHelperText>
-        </FormControl>
+            <FormControl required className={classes.formControl}>
+              <InputLabel id='dificulty-select-label'>
+                Select Dificulty
+              </InputLabel>
+              <Select
+                labelId='dificulty-select-label'
+                id='dificulty-select'
+                className={classes.selectDificulty}
+                value={dificultySelected.name}
+                onChange={handleSelectDificulty}
+              >
+                {dificultiesName.map((name) => {
+                  return (
+                    <MenuItem key={name} value={name}>
+                      {stringFormatter(name)}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+              <FormHelperText>choose dificulty</FormHelperText>
+            </FormControl>
 
-        <FormControl className={classes.formControl}>
-          <TextField
-            className={classes.playerNameInput}
-            label='Player Name'
-            onChange={handleSetPlayerName}
-            value={player.name}
-            required
-            helperText='must be at least 4 characters'
-            inputProps={{
-              minLength: 4,
-              maxLength: 20
-            }}
-          />
-        </FormControl>
+            <FormControl className={classes.formControl}>
+              <TextField
+                className={classes.playerNameInput}
+                label='Player Name'
+                onChange={handleSetPlayerName}
+                value={player.name}
+                required
+                helperText='must be at least 4 characters'
+                inputProps={{
+                  minLength: 4,
+                  maxLength: 20
+                }}
+              />
+            </FormControl>
 
-        <FormControl className={classes.formControl}>
-          <SubmitBtn isSubmitEnabled={isSubmitEnabled} />
-        </FormControl>
-      </form>
-    </Box>
-  );
-});
+            <FormControl className={classes.formControl}>
+              <SubmitBtn isSubmitEnabled={isSubmitEnabled} />
+            </FormControl>
+          </form>
+        ) : null}
+      </Box>
+    );
+  })
+);

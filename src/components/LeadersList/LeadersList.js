@@ -26,23 +26,25 @@ export default connect((state) => {
     gameStartFlag: state.gameStartFlag,
     leadersList: state.leadersList
   };
-})(function LeadersList({ gameStartFlag, leadersList }) {
-  const classes = useStyles();
+})(
+  React.memo(function LeadersList({ gameStartFlag, leadersList }) {
+    const classes = useStyles();
 
-  React.useEffect(() => {
-    refreshLeadersListToStore();
-  }, [gameStartFlag]);
+    React.useEffect(() => {
+      refreshLeadersListToStore();
+    }, [gameStartFlag]);
 
-  return (
-    <Box className={classes.root}>
-      <Typography className={classes.title} variant={'h4'}>
-        Leader Board
-      </Typography>
-      {leadersList.map((leader) => {
-        return (
-          <Leader key={leader.id} name={leader.winner} date={leader.date} />
-        );
-      })}
-    </Box>
-  );
-});
+    return (
+      <Box className={classes.root}>
+        <Typography className={classes.title} variant={'h4'}>
+          Leader Board
+        </Typography>
+        {leadersList.map((leader) => {
+          return (
+            <Leader key={leader.id} name={leader.winner} date={leader.date} />
+          );
+        })}
+      </Box>
+    );
+  })
+);

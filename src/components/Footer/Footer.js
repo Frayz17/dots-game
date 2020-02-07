@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './style/useStyles';
 
-export default function Footer() {
+export default React.memo(function Footer() {
   const classes = useStyles();
   const currentYear = new Date().getFullYear();
   return (
@@ -11,4 +11,4 @@ export default function Footer() {
       <Typography variant={'subtitle1'}>©{currentYear}</Typography>
     </Box>
   );
-}
+});

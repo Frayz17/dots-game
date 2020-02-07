@@ -6,7 +6,8 @@ import {
   setPlayerTimeStartPlay,
   setPlayerTimeEndPlay,
   setPlayerTimeScore,
-  playerReset
+  playerReset,
+  playerResetGame
 } from './actions';
 
 export default player;
@@ -18,5 +19,6 @@ export {
   setPlayerTimeStartPlay,
   setPlayerTimeEndPlay,
   setPlayerTimeScore,
-  playerReset
+  playerReset,
+  playerResetGame
 };

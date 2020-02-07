@@ -16,28 +16,30 @@ export default connect((state) => {
   return {
     gameStartFlag: state.gameStartFlag
   };
-})(function submitBtn({ gameStartFlag, isSubmitEnabled }) {
-  const classes = styleBtnSumit();
+})(
+  React.memo(function submitBtn({ gameStartFlag, isSubmitEnabled }) {
+    const classes = styleBtnSumit();
 
-  let text = 'play';
-  let btnColor = 'primary';
+    let text = 'play';
+    let btnColor = 'primary';
 
-  if (gameStartFlag === 'start' || gameStartFlag === 'stop') {
-    text = 'play again';
-    btnColor = 'secondary';
-  }
+    if (gameStartFlag === 'start' || gameStartFlag === 'stop') {
+      text = 'play again';
+      btnColor = 'secondary';
+    }
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Button
-        className={classes.btnSubmit}
-        type='submit'
-        variant='contained'
-        color={btnColor}
-        disabled={!isSubmitEnabled}
-      >
-        {text}
-      </Button>
-    </ThemeProvider>
-  );
-});
+    return (
+      <ThemeProvider theme={theme}>
+        <Button
+          className={classes.btnSubmit}
+          type='submit'
+          variant='contained'
+          color={btnColor}
+          disabled={!isSubmitEnabled}
+        >
+          {text}
+        </Button>
+      </ThemeProvider>
+    );
+  })
+);

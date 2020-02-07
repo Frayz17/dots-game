@@ -1,8 +1,8 @@
 import { getStore } from 'services/Store';
-import { PLAYER_RESET_ALL } from './actionTypes';
+import { PLAYER_RESET_GAME } from './actionTypes';
 
 export default () => {
   getStore().dispatch({
-    type: PLAYER_RESET_ALL
+    type: PLAYER_RESET_GAME
   });
 };
