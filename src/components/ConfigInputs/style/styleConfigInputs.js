@@ -4,7 +4,7 @@ const styleConfigInputs = makeStyles((theme) => {
   return {
     form: {
       display: 'flex',
-      alignItems: 'flex-end',
+      alignItems: 'center',
       justifyContent: 'center'
     },
     formControl: {

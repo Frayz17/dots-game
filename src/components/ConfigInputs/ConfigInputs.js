@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SubmitBtn from './SubmitBtn';
+import { isObjEmpty } from 'utils';
 import handleSelectDificulty from './functions/handleSelectDificulty';
 import setDificultyList from './functions/setDificultyList';
 import handleSetPlayerName from './functions/handleSetPlayerName';
@@ -11,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField';
 import styleConfigInputs from './style/styleConfigInputs';
 
@@ -25,6 +27,11 @@ export default connect((state) => {
 }) {
   const classes = styleConfigInputs();
 
+  const isSubmitEnabled =
+    player.name.length > 3 &&
+    dificultySelected !== '' &&
+    !isObjEmpty(dificultySelected);
+
   React.useEffect(() => {
     setDificultyList();
   }, []);
@@ -33,8 +40,11 @@ export default connect((state) => {
 
   return (
     <Box>
-      <form className={classes.form} onSubmit={handleFormSubmit}>
-        <FormControl className={classes.formControl}>
+      <form
+        className={classes.form}
+        onSubmit={handleFormSubmit(isSubmitEnabled)}
+      >
+        <FormControl required className={classes.formControl}>
           <InputLabel id='dificulty-select-label'>Select Dificulty</InputLabel>
           <Select
             labelId='dificulty-select-label'
@@ -44,6 +54,8 @@ export default connect((state) => {
             onChange={handleSelectDificulty}
           >
             {dificultiesName.map((name) => {
+              const dificulty = { ...dificultiesList[name], name };
+              console.log(dificulty);
               return (
                 <MenuItem key={name} value={dificultiesList[name]}>
                   {stringFormatter(name)}
@@ -51,6 +63,7 @@ export default connect((state) => {
               );
             })}
           </Select>
+          <FormHelperText>choose dificulty</FormHelperText>
         </FormControl>
 
         <FormControl className={classes.formControl}>
@@ -59,11 +72,17 @@ export default connect((state) => {
             label='Player Name'
             onChange={handleSetPlayerName}
             value={player.name}
+            required
+            helperText='must be at least 4 characters'
+            inputProps={{
+              minLength: 4,
+              maxLength: 20
+            }}
           />
         </FormControl>
 
         <FormControl className={classes.formControl}>
-          <SubmitBtn />
+          <SubmitBtn isSubmitEnabled={isSubmitEnabled} />
         </FormControl>
       </form>
     </Box>

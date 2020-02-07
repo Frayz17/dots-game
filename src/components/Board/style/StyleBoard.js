@@ -1,5 +1,6 @@
 import { getState } from 'services/Store';
 import { makeStyles } from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
 
 export default () => {
   const {
@@ -20,7 +21,9 @@ export default () => {
       gridTemplateColumns: `repeat(${field}, 1fr)`,
       justifyContent: 'center',
       gridTemplateRows: `repeat(${field}, ${boardSize / field}px)`,
-      alignItems: 'stretch'
+      alignItems: 'stretch',
+      borderBottom: `1px solid ${grey[700]}`,
+      borderRight: `1px solid ${grey[700]}`
     },
     '@media (max-width: 490px)': {
       root: {

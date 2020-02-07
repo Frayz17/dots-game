@@ -15,7 +15,7 @@ export default () => {
     ':' +
     addZero(currentdate.getMinutes()) +
     '; ' +
-    currentdate.getDate() +
+    addZero(currentdate.getDate()) +
     ' ' +
     month +
     ' ' +

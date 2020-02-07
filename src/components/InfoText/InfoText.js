@@ -25,7 +25,7 @@ export default connect((state) => {
 
   switch (gameStartFlag) {
     case 'notstarted':
-      text = 'Choose game dificulty, name and press play button';
+      text = 'Welcome to our Game!';
       break;
     case 'start':
       text = 'Press on blue squares.';

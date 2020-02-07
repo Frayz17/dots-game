@@ -1,10 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
 
 const StyleCell = makeStyles((theme) => ({
   td: {
-    // borderLeft: '1px solid black',
-    // borderTop: '1px solid black',
-    border: '1px solid black'
+    borderLeft: `1px solid ${grey[700]}`,
+    borderTop: `1px solid ${grey[700]}`
+    // border: '1px solid black'
   }
 }));
 
