@@ -5,7 +5,6 @@ const StyleCell = makeStyles((theme) => ({
   td: {
     borderLeft: `1px solid ${grey[700]}`,
     borderTop: `1px solid ${grey[700]}`
-    // border: '1px solid black'
   }
 }));
 

@@ -8,10 +8,10 @@ import {
   gameStartFlag,
   player,
   board,
-  leadersList
+  winnersList
 } from 'services/Store';
 
-newStore({ gameDificulty, gameStartFlag, player, board, leadersList });
+newStore({ gameDificulty, gameStartFlag, player, board, winnersList });
 
 ReactDOM.render(
   <StoreProvider>

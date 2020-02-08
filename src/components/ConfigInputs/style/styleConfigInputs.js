@@ -16,10 +16,7 @@ const styleConfigInputs = makeStyles((theme) => {
     playerNameInput: {
       width: 180
     },
-    btnSubmit: {
-      width: 120
-    },
-    '@media (max-width: 490px)': {
+    '@media (max-width: 599px)': {
       form: {
         flexDirection: 'column',
         alignItems: 'center'
@@ -28,9 +25,6 @@ const styleConfigInputs = makeStyles((theme) => {
         width: 250
       },
       playerNameInput: {
-        width: 250
-      },
-      btnSubmit: {
         width: 250
       }
     }

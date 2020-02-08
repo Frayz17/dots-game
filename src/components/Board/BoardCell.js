@@ -1,7 +1,7 @@
 import React from 'react';
+import { tryToCatch } from './functions';
 import Box from '@material-ui/core/Box';
 import StyleCell from './style/StyleCell';
-import { tryToCatch } from './functions';
 import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';

@@ -19,12 +19,14 @@ import styleConfigInputs from './style/styleConfigInputs';
 export default connect((state) => {
   return {
     gameDificulty: state.gameDificulty,
-    player: state.player
+    player: state.player,
+    gameStartFlag: state.gameStartFlag
   };
 })(
   React.memo(function ConfigInputs({
     gameDificulty: { dificultiesList, dificultySelected },
-    player
+    player,
+    gameStartFlag
   }) {
     const classes = styleConfigInputs();
 
@@ -32,6 +34,8 @@ export default connect((state) => {
       player.name.length > 3 &&
       dificultySelected !== '' &&
       !isObjEmpty(dificultySelected);
+
+    const isEditInputsDisabled = gameStartFlag !== 'notstarted';
 
     React.useEffect(() => {
       setDificultyList();
@@ -46,7 +50,11 @@ export default connect((state) => {
             className={classes.form}
             onSubmit={handleFormSubmit(isSubmitEnabled)}
           >
-            <FormControl required className={classes.formControl}>
+            <FormControl
+              disabled={isEditInputsDisabled}
+              required
+              className={classes.formControl}
+            >
               <InputLabel id='dificulty-select-label'>
                 Select Dificulty
               </InputLabel>
@@ -68,20 +76,19 @@ export default connect((state) => {
               <FormHelperText>choose dificulty</FormHelperText>
             </FormControl>
 
-            <FormControl className={classes.formControl}>
-              <TextField
-                className={classes.playerNameInput}
-                label='Player Name'
-                onChange={handleSetPlayerName}
-                value={player.name}
-                required
-                helperText='must be at least 4 characters'
-                inputProps={{
-                  minLength: 4,
-                  maxLength: 20
-                }}
-              />
-            </FormControl>
+            <TextField
+              className={classes.playerNameInput}
+              label='Player Name'
+              onChange={handleSetPlayerName}
+              value={player.name}
+              required
+              disabled={isEditInputsDisabled}
+              helperText='must be at least 4 characters'
+              inputProps={{
+                minLength: 4,
+                maxLength: 20
+              }}
+            />
 
             <FormControl className={classes.formControl}>
               <SubmitBtn isSubmitEnabled={isSubmitEnabled} />

@@ -5,8 +5,7 @@ const infoTextStyle = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    // border: '1px solid black',
-    marginTop: 20,
+    marginTop: 30,
     marginBottom: 30
   },
   text: {}

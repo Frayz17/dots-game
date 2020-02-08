@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { refreshLeadersListToStore } from 'components/LeadersList/functions';
+import { refreshWinnersListToStore } from 'components/WinnersList/functions';
 
 export default async (winner, date) => {
   try {
@@ -10,7 +10,7 @@ export default async (winner, date) => {
         date
       }
     );
-    refreshLeadersListToStore();
+    refreshWinnersListToStore();
   } catch (error) {
     console.log('cant send data to server ', error);
   }

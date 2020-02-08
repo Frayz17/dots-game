@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getState } from 'services/Store';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import infoTextStyle from './style/infoTextStyle';
+import { infoTextStyle } from './style';
 
 export default connect((state) => {
   return {
@@ -39,7 +39,7 @@ export default connect((state) => {
     }
     return (
       <Box className={classes.root}>
-        <Typography className={classes.text} variant={'subtitle1'}>
+        <Typography className={classes.text} variant={'h5'}>
           {text}
         </Typography>
       </Box>
