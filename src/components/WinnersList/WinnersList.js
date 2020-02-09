@@ -22,7 +22,7 @@ export default connect((state) => {
     return (
       <Box className={classes.root}>
         <Typography className={classes.title} variant={'h4'}>
-          Winner Board
+          Winners Board
         </Typography>
         <Box className={classes.listWrapper}>
           {winnersList.map((winner) => {
