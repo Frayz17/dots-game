@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import styleBtnSumit from './style/styleBtnSumit';
+import {
+  start,
+  stop
+} from 'services/Store/reducers/gameStartFlag/gameStartFlagOptions';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -23,7 +27,7 @@ export default connect((state) => {
     let text = 'play';
     let btnColor = 'primary';
 
-    if (gameStartFlag === 'start' || gameStartFlag === 'stop') {
+    if (gameStartFlag === start || gameStartFlag === stop) {
       text = 'play again';
       btnColor = 'secondary';
     }

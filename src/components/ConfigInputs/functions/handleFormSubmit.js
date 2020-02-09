@@ -3,6 +3,10 @@ import {
   gameStart,
   gameStartFlagReset
 } from 'services/Store/reducers/gameStartFlag';
+import {
+  start,
+  stop
+} from 'services/Store/reducers/gameStartFlag/gameStartFlagOptions';
 import { boardReset } from 'services/Store/reducers/board';
 import { playerResetGame } from 'services/Store/reducers/player';
 
@@ -14,7 +18,7 @@ const handleFormSubmit = (isSubmitEnabled) => (e) => {
   if (isSubmitEnabled) {
     gameStart();
   }
-  if (gameStartFlag === 'start' || gameStartFlag === 'stop') {
+  if (gameStartFlag === start || gameStartFlag === stop) {
     gameStartFlagReset();
     boardReset();
     playerResetGame();

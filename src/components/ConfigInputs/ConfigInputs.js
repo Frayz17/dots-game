@@ -7,6 +7,7 @@ import setDificultyList from './functions/setDificultyList';
 import handleSetPlayerName from './functions/handleSetPlayerName';
 import handleFormSubmit from './functions/handleFormSubmit';
 import stringFormatter from './functions/stringFormatter';
+import { notstarted } from 'services/Store/reducers/gameStartFlag/gameStartFlagOptions';
 import Box from '@material-ui/core/Box';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -35,7 +36,7 @@ export default connect((state) => {
       dificultySelected !== '' &&
       !isObjEmpty(dificultySelected);
 
-    const isEditInputsDisabled = gameStartFlag !== 'notstarted';
+    const isEditInputsDisabled = gameStartFlag !== notstarted;
 
     React.useEffect(() => {
       setDificultyList();

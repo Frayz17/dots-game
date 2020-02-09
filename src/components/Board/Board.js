@@ -9,6 +9,10 @@ import {
   handlerPlayerLoose
 } from 'modules/DotsGame/functions';
 import {
+  notstarted,
+  start
+} from 'services/Store/reducers/gameStartFlag/gameStartFlagOptions';
+import {
   fieldCounterIncrement,
   pcScoreIncrement
 } from 'services/Store/reducers/board';
@@ -33,14 +37,14 @@ export default connect((state) => {
 
   // init fields
   React.useEffect(() => {
-    if (!isObjEmpty(dificultySelected) && gameStartFlag === 'notstarted') {
+    if (!isObjEmpty(dificultySelected) && gameStartFlag === notstarted) {
       BuildBoard();
     }
   }, [dificultySelected, gameStartFlag]);
 
   // init fields
   React.useEffect(() => {
-    if (gameStartFlag === 'start') {
+    if (gameStartFlag === start) {
       setPlayerTimeStartPlay();
     }
   }, [gameStartFlag]);
@@ -50,7 +54,7 @@ export default connect((state) => {
     let delayInterval;
     const halfOfBoardFields = Math.ceil(fieldsLength / 2);
 
-    if (gameStartFlag === 'start') {
+    if (gameStartFlag === start) {
       if (playerScore > halfOfBoardFields && halfOfBoardFields > 0) {
         handlerPlayerWin();
       } else if (pcScore > halfOfBoardFields && halfOfBoardFields > 0) {

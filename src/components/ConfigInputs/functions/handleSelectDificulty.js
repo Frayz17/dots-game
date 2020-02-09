@@ -1,4 +1,5 @@
 import { getState } from 'services/Store';
+import { notstarted } from 'services/Store/reducers/gameStartFlag/gameStartFlagOptions';
 import { chooseGameDificulty } from 'services/Store/reducers/gameDificulty';
 
 export default (event) => {
@@ -11,7 +12,7 @@ export default (event) => {
     name: nameOfDificulty
   };
 
-  if (gameStartFlag === 'notstarted') {
+  if (gameStartFlag === notstarted) {
     chooseGameDificulty(selectedDificulty);
   }
 };

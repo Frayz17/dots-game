@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getState } from 'services/Store';
+import {
+  notstarted,
+  start,
+  stop
+} from 'services/Store/reducers/gameStartFlag/gameStartFlagOptions';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { infoTextStyle } from './style';
@@ -25,13 +30,13 @@ export default connect((state) => {
     }
 
     switch (gameStartFlag) {
-      case 'notstarted':
+      case notstarted:
         text = 'Welcome to our Game!';
         break;
-      case 'start':
+      case start:
         text = 'Press on blue squares.';
         break;
-      case 'stop':
+      case stop:
         text = resultGameMsg;
         break;
       default:
