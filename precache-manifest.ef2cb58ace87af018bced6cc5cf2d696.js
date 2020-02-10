@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ccb6d52cee9299800106b53f8380bab4",
+    "revision": "48b5d75db301db56fa9968ba1722d079",
     "url": "/dots-game/index.html"
   },
   {
-    "revision": "71046635e5e2164178e4",
+    "revision": "76bd5bb2cd010145a3f9",
     "url": "/dots-game/static/css/2.1e137fda.chunk.css"
   },
   {
-    "revision": "b7d3756060b386e72316",
+    "revision": "8420deeee8a26f55e325",
     "url": "/dots-game/static/css/main.cb560016.chunk.css"
   },
   {
-    "revision": "71046635e5e2164178e4",
-    "url": "/dots-game/static/js/2.c4aaaa4d.chunk.js"
+    "revision": "76bd5bb2cd010145a3f9",
+    "url": "/dots-game/static/js/2.b7c345f1.chunk.js"
   },
   {
     "revision": "b51e62edbcf7a9c4f4ad13f506021d3e",
-    "url": "/dots-game/static/js/2.c4aaaa4d.chunk.js.LICENSE"
+    "url": "/dots-game/static/js/2.b7c345f1.chunk.js.LICENSE"
   },
   {
-    "revision": "b7d3756060b386e72316",
-    "url": "/dots-game/static/js/main.f8ac68ba.chunk.js"
+    "revision": "8420deeee8a26f55e325",
+    "url": "/dots-game/static/js/main.9258b68d.chunk.js"
   },
   {
     "revision": "fb74c7c7a95d45cbb73b",

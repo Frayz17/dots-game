@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/dots-game/static/css/main.cb560016.chunk.css",
-    "main.js": "/dots-game/static/js/main.f8ac68ba.chunk.js",
-    "main.js.map": "/dots-game/static/js/main.f8ac68ba.chunk.js.map",
+    "main.js": "/dots-game/static/js/main.9258b68d.chunk.js",
+    "main.js.map": "/dots-game/static/js/main.9258b68d.chunk.js.map",
     "runtime-main.js": "/dots-game/static/js/runtime-main.9b1c5b7b.js",
     "runtime-main.js.map": "/dots-game/static/js/runtime-main.9b1c5b7b.js.map",
     "static/css/2.1e137fda.chunk.css": "/dots-game/static/css/2.1e137fda.chunk.css",
-    "static/js/2.c4aaaa4d.chunk.js": "/dots-game/static/js/2.c4aaaa4d.chunk.js",
-    "static/js/2.c4aaaa4d.chunk.js.map": "/dots-game/static/js/2.c4aaaa4d.chunk.js.map",
+    "static/js/2.b7c345f1.chunk.js": "/dots-game/static/js/2.b7c345f1.chunk.js",
+    "static/js/2.b7c345f1.chunk.js.map": "/dots-game/static/js/2.b7c345f1.chunk.js.map",
     "index.html": "/dots-game/index.html",
-    "precache-manifest.48c1dcc5dc21d32bd68b15cf037c63b9.js": "/dots-game/precache-manifest.48c1dcc5dc21d32bd68b15cf037c63b9.js",
+    "precache-manifest.ef2cb58ace87af018bced6cc5cf2d696.js": "/dots-game/precache-manifest.ef2cb58ace87af018bced6cc5cf2d696.js",
     "service-worker.js": "/dots-game/service-worker.js",
     "static/css/2.1e137fda.chunk.css.map": "/dots-game/static/css/2.1e137fda.chunk.css.map",
     "static/css/main.cb560016.chunk.css.map": "/dots-game/static/css/main.cb560016.chunk.css.map",
-    "static/js/2.c4aaaa4d.chunk.js.LICENSE": "/dots-game/static/js/2.c4aaaa4d.chunk.js.LICENSE",
+    "static/js/2.b7c345f1.chunk.js.LICENSE": "/dots-game/static/js/2.b7c345f1.chunk.js.LICENSE",
     "static/media/index.css": "/dots-game/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.9b1c5b7b.js",
     "static/css/2.1e137fda.chunk.css",
-    "static/js/2.c4aaaa4d.chunk.js",
+    "static/js/2.b7c345f1.chunk.js",
     "static/css/main.cb560016.chunk.css",
-    "static/js/main.f8ac68ba.chunk.js"
+    "static/js/main.9258b68d.chunk.js"
   ]
 }
