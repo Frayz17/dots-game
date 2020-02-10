@@ -5,7 +5,7 @@ const styleBtnSumit = makeStyles((theme) => {
     btnSubmit: {
       width: 120
     },
-    '@media (max-width: 599px)': {
+    [theme.breakpoints.down('xs')]: {
       btnSubmit: {
         width: 250,
         marginTop: 15

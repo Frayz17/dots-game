@@ -13,7 +13,7 @@ const WinnersListStyle = makeStyles((theme) => ({
     margin: '0 auto',
     paddingRight: 10
   },
-  '@media (max-width: 960px)': {
+  [theme.breakpoints.down('sm')]: {
     listWrapper: {
       height: 200
     }

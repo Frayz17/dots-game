@@ -3,10 +3,10 @@ import MainPanel from 'sections/MainPanel';
 import InfoPanel from 'sections/InfoPanel';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import useStyles from './style/useStyles';
+import { dotsGameUseStyles } from './style';
 
 export default function DotsGame() {
-  const classes = useStyles();
+  const classes = dotsGameUseStyles();
 
   return (
     <Container className={classes.root}>

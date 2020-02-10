@@ -16,7 +16,7 @@ const styleConfigInputs = makeStyles((theme) => {
     playerNameInput: {
       width: 180
     },
-    '@media (max-width: 599px)': {
+    [theme.breakpoints.down('xs')]: {
       form: {
         flexDirection: 'column',
         alignItems: 'center'
